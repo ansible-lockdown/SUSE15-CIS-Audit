@@ -1,0 +1,34 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_5_1_6 }}
+command:
+  sshd_MACS:
+    title: 5.1.6 | Ensure sshd MACs are configured
+    exec: sshd -T | grep ^macs
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    {{ range .Vars.suse15cis_sshd_weak_macs }}
+    - '!/(?i)^MACs.*{{ . }}/'
+    {{ end }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.1.6
+      CISv8:
+      - 3.10
+      CISv8_IG1: false
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
+  {{ end }}
+{{ end }}

@@ -1,0 +1,24 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_1_3_1_1 }}
+package:
+  {{- range mkSlice "apparmor-parser" "apparmor-profiles" "apparmor-utils" "libapparmor1" }}
+  {{ . }}:
+    title: 1.3.1.1 | Ensure AppArmor is installed | {{ . }}
+    installed: true
+    name: {{ . }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.3.1.1
+      CISv8: 3.3
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5: AC-3
+    {{ end }}
+  {{ end }}
+{{ end }}
+

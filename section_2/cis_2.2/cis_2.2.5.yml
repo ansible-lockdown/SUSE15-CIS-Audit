@@ -1,0 +1,24 @@
+---
+
+{{ if not .Vars.suse15cis_tftp_client }}
+  {{ if .Vars.suse15cis_level_1 }}
+    {{ if .Vars.suse15cis_rule_2_2_5 }}
+package:
+  tftp-client:
+    title: 2.2.5 | Ensure tftp client is not installed
+    name: tftp
+    installed: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.2.5
+      CISv8:
+      - 4.8
+      CISv8_IG1: false
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - CM-7
+    {{ end }}
+  {{ end }}
+{{ end }}

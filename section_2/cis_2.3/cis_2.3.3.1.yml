@@ -1,0 +1,66 @@
+---
+
+{{ if eq .Vars.suse15cis_time_sync_tool "chrony" }}
+  {{ if .Vars.suse15cis_level_1 }}
+    {{ if .Vars.suse15cis_rule_2_3_3_1 }}
+file:
+  chrony_pool:
+    title: 2.3.3.1 | Ensure chrony is configured | timeserver pool
+    path: /etc/chrony/sources.d/pool.source
+    exists: true
+    contents:
+    {{- range .Vars.suse15cis_time_pool }}
+    - '/^pool {{ .name }} {{ .options }}/'
+    {{ end }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.3.3.1
+      CISv8:
+      - 8.4
+      CISv8_IG1: false
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - AU-3
+      - AU-12
+  chrony_timeservers:
+    title: 2.3.3.1 | Ensure chrony is configured | timeserver servers
+    path: /etc/chrony/sources.d/server.source
+    exists: true
+    contents:
+    {{- range .Vars.suse15cis_time_servers }}
+    - '/^server {{ .name }} {{ .options }}/'
+    {{ end }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.3.3.1
+      CISv8:
+      - 8.4
+      CISv8_IG1: false
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - AU-3
+      - AU-12
+  chrony_user:
+    title: 2.3.3.1 | Ensure chrony is configured | user _chrony
+    path: /etc/chrony/chrony.conf
+    exists: true
+    contents:
+    - '/^user _chrony/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.3.3.1
+      CISv8:
+      - 8.4
+      CISv8_IG1: false
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - AU-8
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,27 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if not .Vars.suse15cis_ipv6_required }}
+   {{ if .Vars.suse15cis_rule_3_1_1 }}
+ file:
+  ipv6_disabled:
+    title: 3.1.1 | Ensure IPv6 status is identified | sysctl all disable
+    path: /etc/sysctl.d/60-disable_ipv6.conf
+    exists: true
+    contents:
+    - '/^net.ipv6.conf.all.disable_ipv6\s*=\s*1/'
+    - '/net.ipv6.conf.default.disable_ipv6\s*=\s*1/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID: 3.1.1
+      CISv8:
+      - 4.8
+      CISv8_IG1: false
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - CM-7
+    {{ end }}
+  {{ end }}
+{{ end }}
