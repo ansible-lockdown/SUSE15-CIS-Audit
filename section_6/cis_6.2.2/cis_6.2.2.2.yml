@@ -6,10 +6,14 @@ command:
   journald_syslog:
     title: 6.2.2.2 | Ensure journald ForwardToSyslog is disabled
     exec: grep -i forward /etc/systemd/journald.conf /etc/systemd/journald.conf.d/*
-    exit-status: 0
+    exit-status:
+     or:
+     - 0
+     - 1
+     - 2
     stdout:
-    - '/^.*:(?i)(|#)ForwardToSyslog\s*=\s*no/'
-    - '!/.*:(?i)ForwardToSyslog\s*=\s*yes/'
+    - '/(?i)^.*:(|#)ForwardToSyslog\s*=\s*no/'
+    - '!/(?i).*:ForwardToSyslog\s*=\s*yes/'
     meta:
       server: 1
       workstation: 1

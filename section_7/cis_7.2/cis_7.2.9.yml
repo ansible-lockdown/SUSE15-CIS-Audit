@@ -7,6 +7,7 @@ command:
     title: 7.2.9 | Ensure local interactive user dot files access is configured | bad dot files
     exec: 'find /home/ -name "\.forward" -o -name "\.netrc" -o -name "\.rhosts"'
     exit-status: 0
+    timeout: {{ .Vars.timeout_ms }}
     stdout:
     - '!/./'
     meta:

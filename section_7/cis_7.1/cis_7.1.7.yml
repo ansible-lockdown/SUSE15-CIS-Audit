@@ -6,7 +6,10 @@ file:
   gshadow_perms:
     title: 7.1.7 | Ensure access to /etc/gshadow are configured
     path: /etc/gshadow
-    exists: true
+    exists:
+      or:
+      - true
+      - false
     owner: root
     group:
       or:

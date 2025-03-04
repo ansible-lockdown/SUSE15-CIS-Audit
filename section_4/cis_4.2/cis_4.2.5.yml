@@ -5,7 +5,7 @@
 service:
   firewalld_started_enabled:
     title: 4.2.5 | Ensure firewalld service is enabled and running
-    name: firewald
+    name: firewalld
     running: true
     enabled: true
     meta:

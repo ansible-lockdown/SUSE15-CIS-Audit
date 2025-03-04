@@ -42,7 +42,7 @@ service:
       CISv8_IG3: true
       NIST800-53R5:
       - NA
-  nftables_stopped:
+  nftables_running:
     title: 4.1.1 | Ensure a single firewall configuration utility is in use | nftables running
     name: nftables
     enabled: true
@@ -61,7 +61,7 @@ service:
       NIST800-53R5:
       - NA
   iptables_stopped:
-    title: 4.1.1 | Ensure a single firewall configuration utility is in use | iptables running
+    title: 4.1.1 | Ensure a single firewall configuration utility is in use | iptables stopped
     name: iptables
     enabled: true
     running: true
@@ -138,10 +138,10 @@ service:
       NIST800-53R5:
       - NA
   iptables_stopped:
-    title: 4.1.1 | Ensure a single firewall configuration utility is in use | iptables running
+    title: 4.1.1 | Ensure a single firewall configuration utility is in use | iptables stopped
     name: iptables
-    enabled: true
-    running: true
+    enabled: false
+    running: false
     meta:
       server: 1
       workstation: 1

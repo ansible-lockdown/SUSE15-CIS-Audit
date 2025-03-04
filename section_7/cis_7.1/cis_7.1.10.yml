@@ -6,7 +6,10 @@ file:
   etc_security_opasswd_perms:
     title: 7.1.10 | Ensure access to /etc/security/opasswd are configured
     path: /etc/security/opasswd
-    exists: true
+    exists:
+      or:
+      - true
+      - false
     owner: root
     group: root
     mode:

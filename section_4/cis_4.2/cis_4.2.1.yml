@@ -5,7 +5,7 @@
 package:
   firewalld_installed:
     title: 4.2.1 | Ensure firewalld is installed
-    name: firewald
+    name: firewalld
     installed: true
     meta:
       server: 1

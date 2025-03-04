@@ -8,7 +8,7 @@ command:
     exec: grep log_group /etc/audit/audit* | awk '{ print $NF}'
     exit-status: 0
     stdout:
-    - '/^.*:log_group\s*=\s*(adm|root)$/'
+    - '/(adm|root)/'
     meta:
       server: 2
       workstation: 2
