@@ -4,7 +4,7 @@
   {{ if .Vars.suse15cis_rule_1_7_4 }}
 file:
   motd_permissions:
-    title: 1.7.4 | Ensure permissions on /etc/motd are configured
+    title: 1.7.4 | Ensure access to /etc/motd is configured
     path: /etc/motd
     exists:
       or:

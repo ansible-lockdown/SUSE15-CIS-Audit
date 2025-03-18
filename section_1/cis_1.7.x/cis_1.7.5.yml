@@ -4,7 +4,7 @@
   {{ if .Vars.suse15cis_rule_1_7_5 }}
 file:
   etc_issue_permissions:
-    title: 1.7.5 | Ensure permissions on /etc/issue are configured
+    title: 1.7.5 | Ensure access to /etc/issue is configured
     path: /etc/issue
     exists: true
     mode:

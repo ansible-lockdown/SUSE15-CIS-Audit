@@ -4,7 +4,7 @@
   {{ if .Vars.suse15cis_rule_1_7_6 }}
 file:
   etc_issue_net_permissions:
-    title: 1.7.6 | Ensure permissions on /etc/issue.net are configured
+    title: 1.7.6 | Ensure access to /etc/issue.net is configured
     path: /etc/issue.net
     exists: true
     mode:

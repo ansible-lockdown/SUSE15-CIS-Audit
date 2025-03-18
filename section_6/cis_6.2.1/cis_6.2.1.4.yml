@@ -1,0 +1,67 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_6_2_1_4 }}
+package:
+    {{ if eq .Vars.suse15cis_syslog "journald" }}
+  only_journald_installed_pkg:
+    title: 6.2.1.4 | Ensure only one logging system is in use | journald
+    name: journald
+    installed: true
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.2.1.4
+      CISv8: NA
+      CISv8_IG1: NA
+      CISv8_IG2: NA
+      CISv8_IG3: NA
+      NIST800-53R5: NA
+  only_journald_installed_no_rsyslog:
+    title: 6.2.1.4 | Ensure only one logging system is in use | journald
+    name: rsyslog
+    installed: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.2.1.4
+      CISv8: NA
+      CISv8_IG1: NA
+      CISv8_IG2: NA
+      CISv8_IG3: NA
+      NIST800-53R5: NA
+    {{ end }}
+    {{ if eq .Vars.suse15cis_syslog "rsyslog" }}
+  only_rsyslog_installed_pkg:
+    title: 6.2.1.4 | Ensure only one logging system is in use | rsyslog
+    name: journald
+    installed: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.2.1.4
+      CISv8: NA
+      CISv8_IG1: NA
+      CISv8_IG2: NA
+      CISv8_IG3: NA
+      NIST800-53R5: NA
+  only_syslog_installed_no_journald:
+    title: 6.2.1.4 | Ensure only one logging system is in use | rsyslog
+    name: journald
+    installed: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.2.1.4
+      CISv8: NA
+      CISv8_IG1: NA
+      CISv8_IG2: NA
+      CISv8_IG3: NA
+      NIST800-53R5: NA
+    {{ end }}
+  {{ end }}
+{{ end }}
