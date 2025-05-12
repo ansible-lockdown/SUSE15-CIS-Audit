@@ -39,7 +39,7 @@ package:
       - AU-3
       - AU-12
   {{ end }}
-  {{ if ne .Vars.suse15cis_time_sync_tool "chrony" }}
+  {{ if ne .Vars.suse15cis_time_sync_tool "chronyd" }}
   chrony:
     title: 2.3.1.1 | Ensure time synchronization is in use | chrony service
     installed: false
