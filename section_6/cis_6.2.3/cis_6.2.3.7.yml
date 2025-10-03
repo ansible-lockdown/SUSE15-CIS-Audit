@@ -3,6 +3,24 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_6_2_3_7 }}
+package:
+  rsyslog_pkg:
+    title: 6.2.3.7 | Ensure rsyslog logrotate is configured | pkg check
+    name: logrotate
+    installed: true
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.2.3.7
+      CISv8:
+      - 4.8
+      - 8.2
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - AU-8
 command:
   rsyslog_logrotate:
     title: 6.2.3.7 | Ensure rsyslog logrotate is configured | Manual Check
