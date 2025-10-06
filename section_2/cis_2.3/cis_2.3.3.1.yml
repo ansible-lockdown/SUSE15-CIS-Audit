@@ -9,9 +9,7 @@ file:
     path: /etc/chrony/sources.d/pool.source
     exists: true
     contents:
-    {{- range .Vars.suse15cis_time_pool }}
-    - '/^pool {{ .name }} {{ .options }}/'
-    {{ end }}
+    - '/^pool {{ .Vars.suse15cis_time_pool_name }}/'
     meta:
       server: 1
       workstation: 1
@@ -46,10 +44,10 @@ file:
       - AU-12
   chrony_user:
     title: 2.3.3.1 | Ensure chrony is configured | user _chrony
-    path: /etc/chrony/chrony.conf
+    path: /etc/sysconfig/chrony
     exists: true
     contents:
-    - '/^user _chrony/'
+    - '/^OPTIONS=".*-u chrony/'
     meta:
       server: 1
       workstation: 1
