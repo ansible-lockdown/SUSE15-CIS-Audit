@@ -9,8 +9,8 @@ command:
     exec: 'grep -E "action.*omfwd.*target" /etc/rsyslog.conf /etc/rsyslog.d/*.conf'
     exit-status:
       or:
-        - 0
-        - 2
+      - 0
+      - 2
     stdout:
     - '*.* action(type="omfwd" target="{{ .Vars.suse15cis_remote_log_host }}" port="{{ .Vars.suse15cis_remote_log_port }}"'
     - protocol="{{ .Vars.suse15cis_remote_log_protocol }}"

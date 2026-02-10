@@ -1,22 +1,22 @@
-# Suse 15 Goss config
+# SUSE 15 Goss config
 
 ## Overview
 
-### Based on CIS Benchmark for Suse 15 LTS Benchmark v2.0.1
+### Based on CIS Benchmark for SUSE 15 LTS Benchmark v2.0.1
 
 [Centre For Internet Security]
 
-This repository is set of configuration files and directories to run the audit of the relevant benchmark of Suse 15 servers
+This repository is a set of configuration files and directories to run the audit of the relevant benchmark of SUSE 15 servers.
 
 This is configured in a directory structure level.
 
-## variables
+## Variables
 
 file: vars/{benchmark_type}.yml
 
 Please refer to the file for all options and their meanings
 
-The listed variable for every control/benchmark can be turned on/off or section
+The listed variable for every control/benchmark can be turned on/off per section.
 
 - Other controls
   - enable_selinux
@@ -37,12 +37,12 @@ If running as part of the ansible playbook, this will pull in the relevant branc
 
 - e.g. v1.0.0 will pull in branch benchmark-v1.0.0
 
-Devel is normally the latest benchmark version, so maybe different from the version of benchmark you wish to test.
-Details will show in the README as part of the remedation as to the benchmark for the version it is written for.
+Devel is normally the latest benchmark version, so it may be different from the version of benchmark you wish to test.
+Details will show in the README as part of the remediation as to the benchmark for the version it is written for.
 
 ## Usage
 
-Fot the latest information on audit and how it can be used please visit
+For the latest information on audit and how it can be used please visit
 
 [Read the Docs - Audit]
 
@@ -74,7 +74,7 @@ README Links
 [Centre For Internet Security]: https://www.cisecurity.org
 [Read the Docs - Audit]: https://ansible-lockdown.readthedocs.io/en/latest/audit/getting-started-audit.html
 
-[goss documentation]: (https://github.com/goss-org/goss/blob/master/README.md)
+[goss documentation]: https://github.com/goss-org/goss/blob/master/README.md
 
 [Goss]: https://goss.rocks
 [DISA STIG]: https://public.cyber.mil/stigs
