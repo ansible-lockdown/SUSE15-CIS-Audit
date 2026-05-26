@@ -2,7 +2,7 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_4_1_1 }}
-    {{ if eq .Vars.suse15cis_firewall_package "nftables" }}
+    {{ if eq .Vars.suse15cis_firewall "nftables" }}
 file:
   firewalld_masked:
     title: 4.1.1 | Ensure a single firewall configuration utility is in use | firewalld masked
@@ -79,7 +79,7 @@ service:
       NIST800-53R5:
       - NA
   {{ end }}
-  {{ if eq .Vars.suse15cis_firewall_package "firewalld" }}
+  {{ if eq .Vars.suse15cis_firewall "firewalld" }}
 file:
   nftables_masked:
     title: 4.1.1 | Ensure a single firewall configuration utility is in use | nftables masked

@@ -612,7 +612,7 @@ suse15cis_bluetooth_mask: false
 ## Controls 4.1.x, 4.2.x- Firewall configuration
 # This variable represents the toggle for which firewall package is used.
 # This only allows firewalld setting to anything else will skip these controls in section 4
-suse15cis_firewall_package: "firewalld"
+suse15cis_firewall: "firewalld"
 
 # Set this to be the default zone for firewalld
 suse15cis_default_zone: public
