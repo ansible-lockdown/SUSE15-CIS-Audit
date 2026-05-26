@@ -1,7 +1,7 @@
 ---
 
 ## metadata for Audit benchmark
-benchmark_version: '2.0.0'
+benchmark_version: 'v2.0.1'
 
 
 #  timeout for each command to run where set - default = 10seconds/10000ms
@@ -26,10 +26,10 @@ run_heavy_tests: true
 suse15cis_legacy_boot: true
 
 
-## Desktop requirement toggle
+## Gui requirement toggle
 # This variable governs, whether CIS rules regarding GDM
 # and X-Windows are carried out.
-suse15cis_desktop_required: false
+suse15cis_gui: false
 
 ##
 ## Rule-specific switches
@@ -52,7 +52,6 @@ suse15cis_rule_1_1_1_6: true
 suse15cis_rule_1_1_1_7: true
 suse15cis_rule_1_1_1_8: true
 suse15cis_rule_1_1_1_9: true
-suse15cis_rule_1_1_1_10: true
 
 # 1.1.2 Configure Filesystem Partitions
 # /tmp
@@ -183,7 +182,6 @@ suse15cis_rule_2_2_2: true
 suse15cis_rule_2_2_3: true
 suse15cis_rule_2_2_4: true
 suse15cis_rule_2_2_5: true
-suse15cis_rule_2_2_6: true
 
 # Ensure time synchronization is in use
 suse15cis_rule_2_3_1_1: true
@@ -193,7 +191,6 @@ suse15cis_rule_2_3_2_2: true
 # Configure Chrony
 suse15cis_rule_2_3_3_1: true
 suse15cis_rule_2_3_3_2: true
-suse15cis_rule_2_3_3_3: true
 
 # 2.4 Job Schedulers
 # 2.4.1 Configure Cron
@@ -440,7 +437,6 @@ suse15cis_rule_7_2_6: true
 suse15cis_rule_7_2_7: true
 suse15cis_rule_7_2_8: true
 suse15cis_rule_7_2_9: true
-suse15cis_rule_7_2_10: true
 
 #####################
 ##### Variables #####
@@ -492,7 +488,7 @@ suse15cis_dconf_db_name: local
 ## Control 2.3.1.1
 # This variable choses the tool used for time synchronization
 # The two options are `chrony`and `systemd-timesyncd`.
-suse15cis_time_sync_tool: "systemd-timesyncd"
+suse15cis_time_sync_tool: "chronyd"
 
 ## Controls 2.3.x - Configure time pools & servers for chrony and timesyncd
 # The following variable represents a list of of time server pools used
@@ -696,7 +692,7 @@ suse15cis_sugroup: nosugroup
 # 5.3.2.x.x - Pam Settings
 # Ability to use pam-config tool to set pam settings
 # NOTE: This changes as pwhistory.conf no longer valid Manual changes may need to be complete
-suse15cis_use_pam_config: false
+suse15cis_use_pam_config: true
 
 # 5.4.1.x login.defs password settings
 suse15cis_pass_max_days: "365"
@@ -722,7 +718,7 @@ suse15cis_aide_cron_user: root
 suse15cis_aide_cron_file: /etc/cron.d/aide_cron
 # This variable represents the actual command or script that the cron job
 # will execute for running AIDE.
-suse15cis_aide_cron_job: '/usr/bin/aide --config /etc/aide/aide.conf --check'
+suse15cis_aide_cron_job: '/usr/bin/aide --check'
 # These variables define the schedule for the cron job
 # This variable governs the minute of the time of day when the AIDE cronjob is run.
 # It must be in the range `0-59`.
