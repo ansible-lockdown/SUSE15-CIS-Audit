@@ -1,4 +1,3 @@
-
 ---
 
 {{ if .Vars.suse15cis_level_1 }}
