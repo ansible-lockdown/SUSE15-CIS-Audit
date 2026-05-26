@@ -2,11 +2,11 @@
 ---
 
 {{ if .Vars.suse15cis_level_1 }}
-  {{ if .Vars.suse15cis_rule_6_2_3_1_1 }}
+  {{ if .Vars.suse15cis_rule_6_2_3_1_2 }}
     {{ if not .Vars.suse15cis_remote_log_server }}
 command:
   local_syslog_module:
-    title: 6.2.3.1.2 | Ensure rsyslog is not configured to recieve logs from a remote client | module
+    title: 6.2.3.1.2 | Ensure rsyslog is not configured to receive logs from a remote client | module
     exec: grep "imtcp" /etc/rsyslog.conf /etc/rsyslog.d/*.conf | grep -Ev ":#|port="
     exit-status:
       or:
@@ -32,7 +32,7 @@ command:
       - AU-12
       - CM-6
   local_syslog_input:
-    title: 6.2.3.1.2 | Ensure rsyslog is not configured to recieve logs from a remote client | server/port
+    title: 6.2.3.1.2 | Ensure rsyslog is not configured to receive logs from a remote client | server/port
     exec: grep -E "imtcp\" port|InputTCPServerRun" /etc/rsyslog.conf /etc/rsyslog.d/*.conf | grep -v ":#"
     exit-status:
       or:

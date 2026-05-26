@@ -4,7 +4,7 @@
   {{ if .Vars.suse15cis_rule_7_1_7 }}
 file:
   gshadow_perms:
-    title: 7.1.7 | Ensure access to /etc/gshadow are configured
+    title: 7.1.7 | Ensure access to /etc/gshadow is configured
     path: /etc/gshadow
     exists:
       or:
