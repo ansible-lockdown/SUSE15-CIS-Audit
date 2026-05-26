@@ -365,19 +365,19 @@ suse15cis_rule_6_2_3_7: true
 ## 6.2.4 Configure Logfiles
 suse15cis_rule_6_2_4_1: true
 
-# 6.2.1 Configure auditd services
+# 6.3.1 Configure auditd services
 suse15cis_rule_6_3_1_1: true
 suse15cis_rule_6_3_1_2: true
 suse15cis_rule_6_3_1_3: true
 suse15cis_rule_6_3_1_4: true
 
-# 6.2.2 Configure auditd data retention
+# 6.3.2 Configure auditd data retention
 suse15cis_rule_6_3_2_1: true
 suse15cis_rule_6_3_2_2: true
 suse15cis_rule_6_3_2_3: true
 suse15cis_rule_6_3_2_4: true
 
-# 6.2.3 Configure auditd rules
+# 6.3.3 Configure auditd rules
 suse15cis_rule_6_3_3_1: true
 suse15cis_rule_6_3_3_2: true
 suse15cis_rule_6_3_3_3: true
@@ -400,7 +400,7 @@ suse15cis_rule_6_3_3_19: true
 suse15cis_rule_6_3_3_20: true
 suse15cis_rule_6_3_3_21: true
 
-# 6.2.4 Configure audit file access
+# 6.3.4 Configure audit file access
 suse15cis_rule_6_3_4_1: true
 suse15cis_rule_6_3_4_2: true
 suse15cis_rule_6_3_4_3: true
