@@ -25,12 +25,6 @@ run_heavy_tests: true
 #  True is BIOS based system else set to false
 suse15cis_legacy_boot: true
 
-
-## Gui requirement toggle
-# This variable governs, whether CIS rules regarding GDM
-# and X-Windows are carried out.
-suse15cis_gui: false
-
 ##
 ## Rule-specific switches
 ##
@@ -475,12 +469,19 @@ suse15cis_warning_banner: |
 # This variable governs, whether dynamic motd is disabled (as required by control 1.7.1)
 suse15cis_disable_dynamic_motd: true
 
-## Controls 1.7.x - Settings for GDM
+## Controls 1.8.x - Settings for GDM
+# To set whether this is required
+# If set to true and finds gui installed below is will run CIS
+# if set to false it will remove the gdm package and disable the service
+# then skip al the controls in 1.8.x
+suse15cis_desktop_required: false
+## Graphical/Gnome interface installed
+suse15cis_gui: false
+
 # This variable specifies the GNOME configuration database file to which configurations are written.
 # (See https://help.gnome.org/admin/system-admin-guide/stable/dconf-keyfiles.html.en)
 # The default database is `local`.
-suse15cis_dconf_db_name: local
-
+suse15cis_dconf_db_name: "{{ prelim_dconf_db | default('local') }}"
 ##
 ## Section 2 Control Variables
 ##

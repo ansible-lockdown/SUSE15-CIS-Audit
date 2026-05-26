@@ -1,8 +1,9 @@
 ---
 
-{{ if not .Vars.suse15cis_gui }}
-  {{ if .Vars.suse15cis_level_1 }}
-    {{ if .Vars.suse15cis_rule_1_8_7 }}
+{{ if .Vars.suse15cis_gui }}
+  {{ if .Vars.suse15cis_desktop_required }}
+    {{ if .Vars.suse15cis_level_1 }}
+      {{ if .Vars.suse15cis_rule_1_8_7 }}
 file:
   00-media-autorun_override:
     title: 1.8.7 | Ensure GDM disabling automatic mounting of removable media is not overridden
@@ -20,6 +21,7 @@ file:
       CISv8_IG1: true
       CISv8_IG2: true
       CISv8_IG3: true
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

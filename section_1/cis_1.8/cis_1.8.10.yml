@@ -1,8 +1,9 @@
 ---
 
-{{ if not .Vars.suse15cis_gui }}
-  {{ if .Vars.suse15cis_level_1 }}
-    {{ if .Vars.suse15cis_rule_1_8_10 }}
+{{ if .Vars.suse15cis_gui }}
+  {{ if .Vars.suse15cis_desktop_required }}
+    {{ if .Vars.suse15cis_level_1 }}
+      {{ if .Vars.suse15cis_rule_1_8_10 }}
 file:
   /etc/gdm/custom.conf:
     title: 1.8.10 | Ensure XDMCP is not enabled
@@ -20,6 +21,7 @@ file:
       CISv8_IG1: false
       CISv8_IG2: true
       CISv8_IG3: true
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

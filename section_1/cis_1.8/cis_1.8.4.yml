@@ -1,8 +1,9 @@
 ---
 
-{{ if not .Vars.suse15cis_gui }}
-  {{ if .Vars.suse15cis_level_1 }}
-    {{ if .Vars.suse15cis_rule_1_8_4 }}
+{{ if .Vars.suse15cis_gui }}
+  {{ if .Vars.suse15cis_desktop_required }}
+    {{ if .Vars.suse15cis_level_1 }}
+      {{ if .Vars.suse15cis_rule_1_8_4 }}
 file:
   00-screensaver:
     title: 1.8.4 | Ensure GDM screen locks when the user is idle
@@ -23,6 +24,7 @@ file:
       CISv8_IG1: true
       CISv8_IG2: true
       CISv8_IG3: true
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

@@ -1,8 +1,9 @@
 ---
 
-{{ if not .Vars.suse15cis_gui }}
-  {{ if .Vars.suse15cis_level_1 }}
-    {{ if .Vars.suse15cis_rule_1_8_3 }}
+{{ if .Vars.suse15cis_gui }}
+  {{ if .Vars.suse15cis_desktop_required }}
+    {{ if .Vars.suse15cis_level_1 }}
+      {{ if .Vars.suse15cis_rule_1_8_3 }}
 command:
   gdm_last_login:
     title: 1.8.3 | Ensure GDM disable-user-list option is enabled
@@ -22,11 +23,12 @@ command:
       CISv8_IG1: NA
       CISv8_IG2: NA
       CISv8_IG3: NA
+file:
   00_login_screen:
     title: 1.8.3 | Ensure GDM disable-user-list option is enabled
-    name: /etc/dconf/db/{{ .Vars.suse15cis_dconf_db_name }}.d/00-login-screen
+    path: /etc/dconf/db/{{ .Vars.suse15cis_dconf_db_name }}.d/00-login-screen
     exists: true
-    stdout:
+    contents:
     - '/\[org/gnome/login-screen\]/'
     - '/disable-user-list=true/'
     - '!/disable-user-list=true/'
@@ -40,6 +42,7 @@ command:
       CISv8_IG1: true
       CISv8_IG2: true
       CISv8_IG3: true
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
