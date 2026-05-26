@@ -26,7 +26,7 @@
 
 # Goss benchmark variables (these should not need changing unless new release)
 BENCHMARK=CIS # Benchmark Name aligns to the audit
-BENCHMARK_VER=2.0.1
+BENCHMARK_VER=v2.0.1
 BENCHMARK_OS=SUSE15
 
 # Goss host Variables
