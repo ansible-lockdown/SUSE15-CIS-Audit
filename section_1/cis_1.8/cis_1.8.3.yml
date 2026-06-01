@@ -18,11 +18,6 @@ command:
       workstation: 1
       CIS_ID:
       - 1.8.3
-      CISv8:
-      - NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
 file:
   00_login_screen:
     title: 1.8.3 | Ensure GDM disable-user-list option is enabled
@@ -37,11 +32,6 @@ file:
       workstation: 1
       CIS_ID:
       - 1.8.3
-      CISv8:
-      - 4.1
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       {{ end }}
     {{ end }}
   {{ end }}

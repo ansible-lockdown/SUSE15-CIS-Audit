@@ -18,11 +18,6 @@ file:
       workstation: 1
       CIS_ID:
       - 1.8.2
-      CISv8:
-      - 4.1
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
   01_banner_message:
     title: 1.8.2 | Ensure GDM login banner is configured
     path: /etc/dconf/db/{{ .Vars.suse15cis_dconf_db_name }}.d/01-banner-message
@@ -37,11 +32,6 @@ file:
       workstation: 1
       CIS_ID:
       - 1.8.2
-      CISv8:
-      - 4.1
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       {{ end }}
     {{ end }}
   {{ end }}
