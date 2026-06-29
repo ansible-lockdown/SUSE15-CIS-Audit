@@ -13,10 +13,6 @@ service:
       workstation: 1
       CIS_ID:
       - 6.2.1.4
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       NIST800-53R5: NA
   only_journald_installed_no_rsyslog:
     title: 6.2.1.4 | Ensure only one logging system is in use | journald
@@ -27,10 +23,6 @@ service:
       workstation: 1
       CIS_ID:
       - 6.2.1.4
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       NIST800-53R5: NA
     {{ end }}
     {{ if eq .Vars.suse15cis_syslog "rsyslog" }}
@@ -43,10 +35,6 @@ service:
       workstation: 1
       CIS_ID:
       - 6.2.1.4
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       NIST800-53R5: NA
   only_rsyslog_installed_no_journald:
     title: 6.2.1.4 | Ensure only one logging system is in use | rsyslog
@@ -57,10 +45,6 @@ service:
       workstation: 1
       CIS_ID:
       - 6.2.1.4
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       NIST800-53R5: NA
     {{ end }}
   {{ end }}

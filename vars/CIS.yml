@@ -1,7 +1,7 @@
 ---
 
 ## metadata for Audit benchmark
-benchmark_version: '2.0.0'
+benchmark_version: 'v2.0.1'
 
 
 #  timeout for each command to run where set - default = 10seconds/10000ms
@@ -25,12 +25,6 @@ run_heavy_tests: true
 #  True is BIOS based system else set to false
 suse15cis_legacy_boot: true
 
-
-## Desktop requirement toggle
-# This variable governs, whether CIS rules regarding GDM
-# and X-Windows are carried out.
-suse15cis_desktop_required: false
-
 ##
 ## Rule-specific switches
 ##
@@ -52,7 +46,6 @@ suse15cis_rule_1_1_1_6: true
 suse15cis_rule_1_1_1_7: true
 suse15cis_rule_1_1_1_8: true
 suse15cis_rule_1_1_1_9: true
-suse15cis_rule_1_1_1_10: true
 
 # 1.1.2 Configure Filesystem Partitions
 # /tmp
@@ -120,7 +113,7 @@ suse15cis_rule_1_5_1: true
 suse15cis_rule_1_5_2: true
 suse15cis_rule_1_5_3: true
 
-# 1.6 Configure System Wide cryptopolicy
+# 1.6 Configure System Wide Crypto Policy
 suse15cis_rule_1_6_1: true
 suse15cis_rule_1_6_2: true
 suse15cis_rule_1_6_3: true
@@ -137,7 +130,7 @@ suse15cis_rule_1_7_4: true
 suse15cis_rule_1_7_5: true
 suse15cis_rule_1_7_6: true
 
-# 1.7 Configure GNOME Display Manager
+# 1.8 Configure GNOME Display Manager
 suse15cis_rule_1_8_1: true
 suse15cis_rule_1_8_2: true
 suse15cis_rule_1_8_3: true
@@ -183,7 +176,6 @@ suse15cis_rule_2_2_2: true
 suse15cis_rule_2_2_3: true
 suse15cis_rule_2_2_4: true
 suse15cis_rule_2_2_5: true
-suse15cis_rule_2_2_6: true
 
 # Ensure time synchronization is in use
 suse15cis_rule_2_3_1_1: true
@@ -193,7 +185,6 @@ suse15cis_rule_2_3_2_2: true
 # Configure Chrony
 suse15cis_rule_2_3_3_1: true
 suse15cis_rule_2_3_3_2: true
-suse15cis_rule_2_3_3_3: true
 
 # 2.4 Job Schedulers
 # 2.4.1 Configure Cron
@@ -287,7 +278,7 @@ suse15cis_rule_5_3_2_1_1: true
 suse15cis_rule_5_3_2_1_2: true
 suse15cis_rule_5_3_2_1_3: true
 
-# 5.3.2.2 Configure pam_quality module
+# 5.3.2.2 Configure pam_pwquality module
 suse15cis_rule_5_3_2_2_1: true
 suse15cis_rule_5_3_2_2_2: true
 suse15cis_rule_5_3_2_2_3: true
@@ -297,7 +288,7 @@ suse15cis_rule_5_3_2_2_6: true
 suse15cis_rule_5_3_2_2_7: true
 
 # 5.3.2.3 Configure pam_history module
-# This are added as part of 5.3.2.4 using jinja2 template
+# These are added as part of 5.3.2.4 using jinja2 template
 suse15cis_rule_5_3_2_3_1: true
 suse15cis_rule_5_3_2_3_2: true
 suse15cis_rule_5_3_2_3_3: true
@@ -327,7 +318,7 @@ suse15cis_rule_5_4_2_6: true
 suse15cis_rule_5_4_2_7: true
 suse15cis_rule_5_4_2_8: true
 
-# 5.4.2 Configure user default environment
+# 5.4.3 Configure user default environment
 suse15cis_rule_5_4_3_1: true
 suse15cis_rule_5_4_3_2: true
 suse15cis_rule_5_4_3_3: true
@@ -368,19 +359,19 @@ suse15cis_rule_6_2_3_7: true
 ## 6.2.4 Configure Logfiles
 suse15cis_rule_6_2_4_1: true
 
-# 6.2.1 Configure auditd services
+# 6.3.1 Configure auditd services
 suse15cis_rule_6_3_1_1: true
 suse15cis_rule_6_3_1_2: true
 suse15cis_rule_6_3_1_3: true
 suse15cis_rule_6_3_1_4: true
 
-# 6.2.2 Configure auditd data retention
+# 6.3.2 Configure auditd data retention
 suse15cis_rule_6_3_2_1: true
 suse15cis_rule_6_3_2_2: true
 suse15cis_rule_6_3_2_3: true
 suse15cis_rule_6_3_2_4: true
 
-# 6.2.3 Configure auditd rules
+# 6.3.3 Configure auditd rules
 suse15cis_rule_6_3_3_1: true
 suse15cis_rule_6_3_3_2: true
 suse15cis_rule_6_3_3_3: true
@@ -403,7 +394,7 @@ suse15cis_rule_6_3_3_19: true
 suse15cis_rule_6_3_3_20: true
 suse15cis_rule_6_3_3_21: true
 
-# 6.2.4 Configure audit file access
+# 6.3.4 Configure audit file access
 suse15cis_rule_6_3_4_1: true
 suse15cis_rule_6_3_4_2: true
 suse15cis_rule_6_3_4_3: true
@@ -440,7 +431,6 @@ suse15cis_rule_7_2_6: true
 suse15cis_rule_7_2_7: true
 suse15cis_rule_7_2_8: true
 suse15cis_rule_7_2_9: true
-suse15cis_rule_7_2_10: true
 
 #####################
 ##### Variables #####
@@ -471,38 +461,45 @@ suse15cis_bootloader_password_hash: "grub.pbkdf2.sha512.changethispassword"  # p
 
 # This variable specifies the warning banner displayed to the user
 # after local login, remote login, and as motd (message of the day)
-# Noe that the banner text must not contain the below items in order to be
+# Note that the banner text must not contain the below items in order to be
 # compliant with CIS: \m, \r, \s, \v or references to the OS platform
 suse15cis_warning_banner: |
-  Authorized uses only. All activity may be monitored and reported.
+  Authorized users only. All activity may be monitored and reported.
 
 # This variable governs, whether dynamic motd is disabled (as required by control 1.7.1)
 suse15cis_disable_dynamic_motd: true
 
-## Controls 1.7.x - Settings for GDM
+## Controls 1.8.x - Settings for GDM
+# To set whether this is required
+# If set to true and finds gui installed below is will run CIS
+# if set to false it will remove the gdm package and disable the service
+# then skip al the controls in 1.8.x
+suse15cis_desktop_required: false
+## Graphical/Gnome interface installed
+suse15cis_gui: false
+
 # This variable specifies the GNOME configuration database file to which configurations are written.
 # (See https://help.gnome.org/admin/system-admin-guide/stable/dconf-keyfiles.html.en)
 # The default database is `local`.
-suse15cis_dconf_db_name: local
-
+suse15cis_dconf_db_name: "{{ prelim_dconf_db | default('local') }}"
 ##
 ## Section 2 Control Variables
 ##
 
 ## Control 2.3.1.1
-# This variable choses the tool used for time synchronization
+# This variable chooses the tool used for time synchronization
 # The two options are `chrony`and `systemd-timesyncd`.
-suse15cis_time_sync_tool: "systemd-timesyncd"
+suse15cis_time_sync_tool: "chronyd"
 
 ## Controls 2.3.x - Configure time pools & servers for chrony and timesyncd
-# The following variable represents a list of of time server pools used
+# The following variable represents a list of time server pools used
 # for configuring chrony and timesyncd.
 # Each list item contains two settings, `name` (the domain name of the pool) and synchronization `options`.
 # The default setting for the `options` is `iburst maxsources 4` -- please refer to the documentation
 # of the time synchronization mechanism you are using.
 suse15cis_time_pool_name: time.nist.gov
 
-# The following variable represents a list of of time servers used
+# The following variable represents a list of time servers used
 # for configuring chrony and timesyncd
 # Each list item contains two settings, `name` (the domain name of the server) and synchronization `options`.
 # The default setting for the `options` is `iburst` -- please refer to the documentation
@@ -523,9 +520,9 @@ suse15cis_time_servers:
 ##
 # Service configuration
 # Options are
-# true to leave installed if exists not changes take place
+# true to leave installed if it exists, no changes take place
 # false - this removes the package
-# mask - if a dependancy for product so cannot be removed
+# mask - if a dependency for product so cannot be removed
 # Server Services
 suse15cis_autofs_services: false
 suse15cis_autofs_mask: false
@@ -543,13 +540,13 @@ suse15cis_ldap_server: false
 suse15cis_ldap_mask: false
 suse15cis_message_server: false  # This is for messaging dovecot and cyrus-imap
 suse15cis_message_mask: false
-suse15cis_nfs_server: true
+suse15cis_nfs_server: false
 suse15cis_nfs_mask: true
 suse15cis_nis_server: true  # set to mask if nis client required
 suse15cis_nis_mask: false
 suse15cis_print_server: false  # replaces cups
 suse15cis_print_mask: false
-suse15cis_rpc_server: true
+suse15cis_rpc_server: false
 suse15cis_rpc_mask: true
 suse15cis_rsync_server: false
 suse15cis_rsync_mask: false
@@ -601,11 +598,11 @@ suse15cis_ipv6_required: false
 suse15cis_ipv6_disable: grub
 
 ## Control 3.1.3 - Ensure bluetooth Services are not in use
-# This control managed how the bluetooth service is managaed
+# This control manages how the bluetooth service is managed
 # Options are
-# true to leave installed if exists not changes take place
+# true to leave installed if it exists, no changes take place
 # false - this removes the package
-# mask - if a dependancy for product so cannot be removed
+# mask - if a dependency for product so cannot be removed
 suse15cis_bluetooth_service: false
 suse15cis_bluetooth_mask: false
 
@@ -682,7 +679,7 @@ suse15cis_sshd_deny_groups:
 
 # The two options ClientAliveInterval and ClientAliveCountMax control the timeout of SSH sessions.
 # alive interval in ms in seconds
-# countmax times to count aline interval
+# countmax times to count alive interval
 # e.g 15sec x 3 = 45 seconds
 suse15cis_sshd_client_alive_interval: 15
 suse15cis_sshd_client_alive_count_max: 3
@@ -696,7 +693,7 @@ suse15cis_sugroup: nosugroup
 # 5.3.2.x.x - Pam Settings
 # Ability to use pam-config tool to set pam settings
 # NOTE: This changes as pwhistory.conf no longer valid Manual changes may need to be complete
-suse15cis_use_pam_config: false
+suse15cis_use_pam_config: true
 
 # 5.4.1.x login.defs password settings
 suse15cis_pass_max_days: "365"
@@ -722,7 +719,7 @@ suse15cis_aide_cron_user: root
 suse15cis_aide_cron_file: /etc/cron.d/aide_cron
 # This variable represents the actual command or script that the cron job
 # will execute for running AIDE.
-suse15cis_aide_cron_job: '/usr/bin/aide --config /etc/aide/aide.conf --check'
+suse15cis_aide_cron_job: '/usr/bin/aide --check'
 # These variables define the schedule for the cron job
 # This variable governs the minute of the time of day when the AIDE cronjob is run.
 # It must be in the range `0-59`.
@@ -733,12 +730,12 @@ suse15cis_aide_cron_hour: 5
 # This variable governs the day of the month when the AIDE cronjob is run.
 # `*` signifies that the job is run on all days; furthermore, specific days
 # can be given in the range `1-31`; several days can be concatenated with a comma.
-# The specified day(s) can must be in the range  `1-31`.
+# The specified day(s) must be in the range `1-31`.
 suse15cis_aide_cron_day: '*'
 # This variable governs months when the AIDE cronjob is run.
 # `*` signifies that the job is run in every month; furthermore, specific months
 # can be given in the range `1-12`; several months can be concatenated with commas.
-# The specified month(s) can must be in the range  `1-12`.
+# The specified month(s) must be in the range `1-12`.
 suse15cis_aide_cron_month: '*'
 # This variable governs the weekdays, when the AIDE cronjob is run.
 # `*` signifies that the job is run on all weekdays; furthermore, specific weekdays
@@ -828,7 +825,7 @@ suse15cis_journal_upload_url: 192.168.50.42
 ## The paths below have the default paths/files, but allow user to create custom paths/filenames
 
 ## Control 6.2.2.1.2 - Ensure systemd-journal-remote is configured
-# The filename in which the correct configuration shoud be stored in /etc/systemd/journal-upload.conf.d/
+# The filename in which the correct configuration should be stored in /etc/systemd/journal-upload.conf.d/
 suse15cis_journal_remote_upload_config_file: remote_upload.conf
 # This variable specifies the path to the private key file used by the remote journal
 # server to authenticate itself to the client. This key is used alongside the server's
@@ -846,7 +843,7 @@ suse15cis_journal_trustedcertificatefile: "/etc/ssl/ca/trusted.pem"
 # ATTENTION: Uncomment the keyword below when values are set!
 
 # Controls 6.2.2.x journald configuration files
-# Best parctice is to use configuration files rather than a default conf.
+# Best practice is to use configuration files rather than a default conf.
 # This allows you to call the files as you have set them or change to match your site policy
 # These can be found in /etc/systemd/journald.conf.d/
 # 6.2.2.2

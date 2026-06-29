@@ -12,12 +12,12 @@ file:
       - true
     mode:
       or:
-       - '0644'
-       - '0640'
-       - '0600'
-       - '0444'
-       - '0440'
-       - '0400'
+      - '0644'
+      - '0640'
+      - '0600'
+      - '0444'
+      - '0440'
+      - '0400'
     owner: root
     group: root
     meta:
@@ -25,12 +25,6 @@ file:
       workstation: 1
       CIS_ID:
       - 1.7.4
-      CISv8:
-      - 3.3
-      - 4.1
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AC-3
       - MP-2

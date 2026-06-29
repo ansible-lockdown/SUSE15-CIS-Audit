@@ -4,7 +4,7 @@
   {{ if .Vars.suse15cis_rule_5_1_7 }}
 file:
   sshd_access_limited:
-    title: 5.1.7 | Ensure SSH access is configured
+    title: 5.1.7 | Ensure sshd access is configured
     path: /etc/ssh/sshd_config
     exists: true
     contents:
@@ -17,11 +17,6 @@ file:
       workstation: 1
       CIS_ID:
       - 5.1.7
-      CISv8:
-      - 3.3
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AC-3
       - MP-2

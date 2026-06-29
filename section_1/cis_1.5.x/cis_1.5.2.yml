@@ -18,11 +18,6 @@ command:
       workstation: 1
       CIS_ID:
       - 1.5.2
-      CISv8:
-      - N/A
-      CISv8_IG1: N/A
-      CISv8_IG2: N/A
-      CISv8_IG3: N/A
       NIST800-53R5: CM-6
   coredump_dumpable_conf:
     title: 1.5.2 | Ensure core dumps are restricted | sysctl
@@ -39,11 +34,6 @@ command:
       workstation: 1
       CIS_ID:
       - 1.5.2
-      CISv8:
-      - N/A
-      CISv8_IG1: N/A
-      CISv8_IG2: N/A
-      CISv8_IG3: N/A
       NIST800-53R5: CM-6
 kernel-param:
   fs_suid_dumpable:
@@ -55,11 +45,6 @@ kernel-param:
       workstation: 1
       CIS_ID:
       - 1.5.2
-      CISv8:
-      - N/A
-      CISv8_IG1: N/A
-      CISv8_IG2: N/A
-      CISv8_IG3: N/A
       NIST800-53R5: CM-6
   {{ end }}
 {{ end }}

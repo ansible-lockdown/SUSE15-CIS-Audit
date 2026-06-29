@@ -10,7 +10,7 @@ gossfile:
   section_3/cis_3.2/*.yml: {}
   section_3/cis_3.3/*.yml: {}
 ## firewall configurations
-    {{ if eq .Vars.suse15cis_firewall "firewalld" }}
+    {{ if eq .Vars.suse15cis_firewall_package "firewalld" }}
   section_3/cis_3.4.1/*.yml: {}
     {{ end }}
     {{ if eq .Vars.suse15cis_firewall "nftables" }}

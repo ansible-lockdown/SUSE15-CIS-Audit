@@ -4,7 +4,7 @@
   {{ if .Vars.suse15cis_rule_6_3_3_6 }}
 command:
   auditd_priv_cmds_cnf:
-    title: 6.3.3.6 | Ensure use of privileged commands is collected | Config
+    title: 6.3.3.6 | Ensure use of privileged commands are collected | Config
     exec: grep delete /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -13,11 +13,6 @@ command:
       workstation: 2
       CIS_ID:
       - 6.3.3.6
-      CISv8:
-      - 8.5
-      CISv8_IG1: false
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AU-3
       - AU-3(1)
