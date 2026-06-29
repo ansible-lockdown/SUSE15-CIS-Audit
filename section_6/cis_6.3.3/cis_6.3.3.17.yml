@@ -4,7 +4,7 @@
   {{ if .Vars.suse15cis_rule_6_3_3_17 }}
 command:
   chacl_module_cnf:
-    title: 6.3.3.17 | Ensure successful and unsuccessful attempts to use the chacl command are recorded | Config
+    title: 6.3.3.17 | Ensure successful and unsuccessful attempts to use the chacl command are collected | Config
     exec: grep chacl /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -14,17 +14,12 @@ command:
       workstation: 2
       CIS_ID:
       - 6.3.3.17
-      CISv8:
-      - 8.2
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AU-2
       - AU-12
       - SI-5
   chacl_module_live:
-    title: 6.3.3.17 | Ensure successful and unsuccessful attempts to use the chacl command are recorded | Live
+    title: 6.3.3.17 | Ensure successful and unsuccessful attempts to use the chacl command are collected | Live
     exec: auditctl -l | grep chacl
     exit-status: 0
     stdout:
@@ -34,11 +29,6 @@ command:
       workstation: 2
       CIS_ID:
       - 6.3.3.17
-      CISv8:
-      - 8.5
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AU-2
       - AU-12

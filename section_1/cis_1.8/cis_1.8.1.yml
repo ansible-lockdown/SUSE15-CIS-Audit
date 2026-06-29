@@ -1,8 +1,9 @@
 ---
 
 {{ if not .Vars.suse15cis_gui }}
-  {{ if .Vars.suse15cis_level_2 }}
-    {{ if .Vars.suse15cis_rule_1_8_1 }}
+  {{ if not .Vars.suse15cis_desktop_required }}
+    {{ if .Vars.suse15cis_level_2 }}
+      {{ if .Vars.suse15cis_rule_1_8_1 }}
 package:
   gdm_removed:
     title: 1.8.1 | Ensure GNOME Display Manager is removed
@@ -13,12 +14,8 @@ package:
       workstation: NA
       CIS_ID:
       - 1.8.1
-      CISv8:
-      - 4.8
-      CISv8_IG1: false
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5: NA
+      {{ end}}
     {{ end }}
   {{ end }}
 {{ end }}
