@@ -540,13 +540,13 @@ suse15cis_ldap_server: false
 suse15cis_ldap_mask: false
 suse15cis_message_server: false  # This is for messaging dovecot and cyrus-imap
 suse15cis_message_mask: false
-suse15cis_nfs_server: true
+suse15cis_nfs_server: false
 suse15cis_nfs_mask: true
 suse15cis_nis_server: true  # set to mask if nis client required
 suse15cis_nis_mask: false
 suse15cis_print_server: false  # replaces cups
 suse15cis_print_mask: false
-suse15cis_rpc_server: true
+suse15cis_rpc_server: false
 suse15cis_rpc_mask: true
 suse15cis_rsync_server: false
 suse15cis_rsync_mask: false
