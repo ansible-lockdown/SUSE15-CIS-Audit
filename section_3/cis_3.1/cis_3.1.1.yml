@@ -2,8 +2,8 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if not .Vars.suse15cis_ipv6_required }}
-   {{ if .Vars.suse15cis_rule_3_1_1 }}
- file:
+    {{ if .Vars.suse15cis_rule_3_1_1 }}
+file:
   ipv6_disabled:
     title: 3.1.1 | Ensure IPv6 status is identified | sysctl all disable
     path: /etc/sysctl.d/60-disable_ipv6.conf

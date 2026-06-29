@@ -16,7 +16,7 @@ command:
       - 1.2.1.2
       NIST800-53R5: SI-2
   gpg_check_repo:
-    title: 1.2.2 | Ensure gpgcheck is globally activated
+    title: 1.2.1.2 | Ensure gpgcheck is globally active
     exit-status: 0
     exec: "if [ `grep -c -E '^\\s*gpgcheck.*0' /etc/zypp/repos.d/*.repo` -ge 1 ]; then echo FAIL; elif [ `grep -c -E '^\\s*gpgcheck.*1' /etc/zypp/repos.d/*.repo` -ge 1 ]; then echo Passed_Check;fi"
     timeout: {{ .Vars.timeout_ms }}
@@ -24,7 +24,7 @@ command:
       server: 1
       workstation: 1
       CIS_ID:
-      - 1.2.2
+      - 1.2.1.2
       NIST800-53R5: SI-2
       {{ end }}
   {{ end }}
