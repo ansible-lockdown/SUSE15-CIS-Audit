@@ -27,7 +27,7 @@ gossfile:
   {{ end }}
   {{ if .Vars.suse15cis_section4 }}
   section_4/cis_4.1/*.yml: {}
-    {{ if eq .Vars.suse15cis_firewall "firewalld" }}
+    {{ if eq .Vars.suse15cis_firewall_package "firewalld" }}
   section_4/cis_4.2/*.yml: {}
     {{ end }}
   {{ end }}

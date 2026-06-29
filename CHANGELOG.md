@@ -14,3 +14,4 @@
 - Fixed 36 goss test title: fields to match benchmark v2.0.1 wording: "permissions on" -> "access to" (2.4.1.x, 5.1.1-3), "SSH" -> "sshd" (5.1.7/12/17/18/19/20/21), "recorded" -> "collected" (6.3.3.15-18), "are configured" -> "is configured" (7.1.4-10), typo "recieve" -> "receive" (6.2.3.1.2), and others
 - Contributing added
 - updated run_audit.sh for less risk of incorrect OS being discovered
+- suse15cis_firewall variable renamed to suse15cis_firewall_package inline with remediation
