@@ -2,6 +2,13 @@
 
 # Based on CIS v2.0.1
 
+# 2026 July — QA pass: goss update
+
+- README.md: goss requirement updated >= 0.4.4 -> >= 0.5.0
+- README.md: goss documentation URL updated goss-org -> krameff
+- run_audit.sh: AUDIT_BIN_MIN_VER updated 0.4.4 -> 0.5.0
+- run_audit.sh: goss_installed_version awk updated to NR==1 guard to handle multiline goss -v output
+
 # 2026 May QA Updates
 - Fix benchmark_version: corrected to 'v2.0.1' (was '2.0.0')
 - Fix run_audit.sh BENCHMARK_VER: added v prefix (was '2.0.1')
