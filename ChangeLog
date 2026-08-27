@@ -1,6 +1,23 @@
 ChangeLog - SUSE15-CIS-Audit
 =============================
 
+## August 2026: Alignment with CIS v2.0.1
+
+### Titles
+- Goss titles resynced to the v2.0.1 benchmark across 20 files, including
+  1.2.1.2, 1.2.1.4, 2.1.6, 2.1.13, 2.2.3, 2.3.1.1, 2.4.1.2-2.4.1.7, 3.3.3,
+  3.3.10, 5.1.1, 5.1.2, 5.1.3, 5.1.8, 5.4.2.5 and 6.3.3.7
+
+### Profiles
+- meta server/workstation corrected on 13 blocks: 1.1.1.9, 1.8.7, 2.1.12, 2.1.21,
+  2.2.2, 3.1.1, 3.1.2, 5.1.10, 5.3.2.1.3, 5.4.1.2
+- Level gates raised to level_2 on 2.1.21, 2.2.2, 5.3.2.1.3 and 5.4.1.2, which the
+  benchmark lists as Level 2 for both Server and Workstation
+- 1.8.6, 1.8.7, 2.1.1, 2.1.2 and 3.1.3 are Level 1 - Server and Level 2 -
+  Workstation. Their gates are deliberately held at level_1: gating on the higher
+  of the two levels would stop a Level 1 Server audit checking controls a Level 1
+  Server has to meet
+
 ## February 2026: QA Fixes
 
 ### README.md

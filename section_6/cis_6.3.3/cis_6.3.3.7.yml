@@ -20,7 +20,7 @@ command:
       NIST800-53R5:
       - AU-3
   auditd_access_live:
-    title: 6.3.3.7 | Ensure unsuccessful file access attempts are collected| Live
+    title: 6.3.3.7 | Ensure unsuccessful file access attempts are collected | Live
     exec: auditctl -l | grep access
     exit-status: 0
     stdout:
