@@ -1,6 +1,31 @@
 ChangeLog - SUSE15-CIS-Audit
 =============================
 
+## August 2026: QA pass fixes
+
+- CONTRIBUTING.rst replaced with the canonical CONTRIBUTING.md and a README Contributing
+  section added
+
+- 2.3.3.1 and 2.3.3.2 gated on suse15cis_time_sync_tool "chrony"; the variable is
+  "chronyd", so both controls emitted zero assertions in a real audit run
+- 5.1.7 asserted AllowUsers/AllowGroups/DenyUsers/DenyGroups unconditionally while
+  remediation writes each only when its variable is set, so the control always failed.
+  The assertions are now gated, and the four variables are '' rather than YAML null
+- 6.2.3.3 carried CIS_ID 6.2.3.2
+- 5.4.2.4 accepted only a set password (P); CIS also allows a locked root account (L)
+- 1.5.2 negative assertion had a stray / after .*: and could never fire
+- 3.3.11 used net\.ipv6\conf\. instead of net\.ipv6\.conf\.
+- 1.8.2 to 1.8.10 additionally gated on suse15cis_desktop_required, which remediation
+  does not use. goss.yml also gated the whole section_1/cis_1.8 glob on the same
+  variable, so with the default false the directory was excluded outright. Both the
+  per-file gates and the glob gate are removed; each file gates on suse15cis_gui, as
+  remediation does
+- vars/CIS.yml: nfs_server and rpc_server were false against remediation's true, which
+  inverted the 2.1.10 and 2.1.13 gates in a standalone run
+- vars/CIS.yml: removed an Ansible Jinja expression goss cannot template, and four
+  variables no test references
+- .gitignore held only .github/; replaced with the standard Lockdown set
+
 ## August 2026: Alignment with CIS v2.0.1
 
 ### Titles

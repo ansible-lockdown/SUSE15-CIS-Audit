@@ -28,7 +28,7 @@ command:
       - 2
     stdout:
     - '/.*:fs.suid_dumpable\s*=\s*0/'
-    - '!/.*:/fs.suid_dumpable\s*=\s*[1-9]/'
+    - '!/.*:fs.suid_dumpable\s*=\s*[1-9]/'
     meta:
       server: 1
       workstation: 1
