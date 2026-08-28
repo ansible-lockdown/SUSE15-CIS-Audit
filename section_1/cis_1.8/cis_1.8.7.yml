@@ -1,7 +1,6 @@
 ---
 
 {{ if .Vars.suse15cis_gui }}
-  {{ if .Vars.suse15cis_desktop_required }}
     {{ if .Vars.suse15cis_level_1 }}
       {{ if .Vars.suse15cis_rule_1_8_7 }}
 file:
@@ -14,10 +13,9 @@ file:
     - '^/\/org\/gnome\/desktop\/media-handling\/automount-open/'
     meta:
       server: 1
-      workstation: 1
+      workstation: 2
       CIS_ID:
       - 1.8.7
       {{ end }}
     {{ end }}
-  {{ end }}
 {{ end }}

@@ -1,1 +1,47 @@
+# Secrets and keys
+*.vault
+*.key
+*.pem
+*.p12
+*.pfx
+*.keystore
+*.jks
+*.credentials
+*vault_pass*
+.vault_pass
+
+# QA and temp artifacts
+qa_report.md
+*qa_report*
+AL_QA_Report*
+prompt.md
+plan.md
+*plan.md
+history.md
+*history.md
+test_inv
+*.pdf
+
+# Editor and OS
+.vscode
+.DS_Store
+._*
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ansible
+.ansible/
 .github/
+*.retry
+.env
+*.log
+
+# General
+delete*
+ignore*
