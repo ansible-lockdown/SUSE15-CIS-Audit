@@ -1,6 +1,6 @@
 ---
 
-{{ if eq .Vars.suse15cis_time_sync_tool "chrony" }}
+{{ if eq .Vars.suse15cis_time_sync_tool "chronyd" }}
   {{ if .Vars.suse15cis_level_1 }}
     {{ if .Vars.suse15cis_rule_2_3_3_2 }}
 service:
