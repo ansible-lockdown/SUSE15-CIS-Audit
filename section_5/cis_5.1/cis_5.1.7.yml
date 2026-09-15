@@ -7,12 +7,12 @@ file:
     title: 5.1.7 | Ensure sshd access is configured
     path: /etc/ssh/sshd_config
     exists: true
-    contents:
-    - AllowUsers {{ .Vars.suse15cis_sshd_allow_users }}
-    - AllowGroups {{ .Vars.suse15cis_sshd_allow_groups }}
-    - DenyUsers {{ .Vars.suse15cis_sshd_deny_users }}
-    - DenyGroups{{ .Vars.suse15cis_sshd_deny_groups }}
-    meta:
+{{ if or .Vars.suse15cis_sshd_allow_users .Vars.suse15cis_sshd_allow_groups .Vars.suse15cis_sshd_deny_users .Vars.suse15cis_sshd_deny_groups }}    contents:
+{{ if .Vars.suse15cis_sshd_allow_users }}    - AllowUsers {{ .Vars.suse15cis_sshd_allow_users }}
+{{ end }}{{ if .Vars.suse15cis_sshd_allow_groups }}    - AllowGroups {{ .Vars.suse15cis_sshd_allow_groups }}
+{{ end }}{{ if .Vars.suse15cis_sshd_deny_users }}    - DenyUsers {{ .Vars.suse15cis_sshd_deny_users }}
+{{ end }}{{ if .Vars.suse15cis_sshd_deny_groups }}    - DenyGroups {{ .Vars.suse15cis_sshd_deny_groups }}
+{{ end }}{{ end }}    meta:
       server: 1
       workstation: 1
       CIS_ID:

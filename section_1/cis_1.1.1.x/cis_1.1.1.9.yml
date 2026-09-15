@@ -11,7 +11,7 @@ command:
     - '!/(afs|ceph|cifs|exfat|ext|fat|fscache|fuse|gfs2|nfs_common|nfsd|smbfs_common)/'
     meta:
       server: 1
-      workstation: 2
+      workstation: 1
       CIS_ID: 1.1.1.9
       NIST800-53R5: CM-7
   {{ end }}

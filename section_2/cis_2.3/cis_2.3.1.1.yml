@@ -31,7 +31,7 @@ package:
   {{ end }}
   {{ if ne .Vars.suse15cis_time_sync_tool "ntp" }}
   ntp:
-    title: 2.3.1.1 | Ensure time synchronization is in use | ntp service
+    title: 2.3.1.1 | Ensure a single time synchronization daemon is in use | ntp service
     installed: false
     meta:
       server: 1
@@ -43,7 +43,7 @@ package:
   {{ end }}
   {{ if ne .Vars.suse15cis_time_sync_tool "chronyd" }}
   chrony:
-    title: 2.3.1.1 | Ensure time synchronization is in use | chrony service
+    title: 2.3.1.1 | Ensure a single time synchronization daemon is in use | chrony service
     installed: false
     meta:
       server: 1
@@ -56,7 +56,7 @@ package:
   {{ if ne .Vars.suse15cis_time_sync_tool "systemd-timesyncd" }}
 file:
   timesync_masked:
-    title: 2.3.1.1 | Ensure time synchronization is in use | systemd-timesyncd masked
+    title: 2.3.1.1 | Ensure a single time synchronization daemon is in use | systemd-timesyncd masked
     path: /etc/systemd/system/systemd-timesyncd.service
     filetype: symlink
     linked-to: /dev/null
