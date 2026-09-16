@@ -6,7 +6,7 @@
 file:
   chrony_pool:
     title: 2.3.3.1 | Ensure chrony is configured | timeserver pool
-    path: /etc/chrony/sources.d/pool.source
+    path: /etc/chrony.d/pool.conf
     exists: true
     contents:
     - '/^pool {{ .Vars.suse15cis_time_pool_name }}/'
@@ -19,7 +19,7 @@ file:
       - AU-12
   chrony_timeservers:
     title: 2.3.3.1 | Ensure chrony is configured | timeserver servers
-    path: /etc/chrony/sources.d/server.source
+    path: /etc/chrony.d/server.conf
     exists: true
     contents:
     {{- range .Vars.suse15cis_time_servers }}
@@ -33,8 +33,8 @@ file:
       - AU-3
       - AU-12
   chrony_user:
-    title: 2.3.3.1 | Ensure chrony is configured | user _chrony
-    path: /etc/sysconfig/chrony
+    title: 2.3.3.1 | Ensure chrony is configured | user chrony
+    path: /etc/sysconfig/chronyd
     exists: true
     contents:
     - '/^OPTIONS=".*-u chrony/'

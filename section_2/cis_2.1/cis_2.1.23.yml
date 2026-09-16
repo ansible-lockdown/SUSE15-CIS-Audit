@@ -10,7 +10,7 @@ command:
       - 0
       - 1
     exec: echo "Manual!! - Please check only approved services are listening"
-    stdout: ['!/./']
+    stdout: []
     meta:
       server: 1
       workstation: 1

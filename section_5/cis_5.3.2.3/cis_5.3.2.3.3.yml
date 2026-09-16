@@ -12,7 +12,7 @@ command:
       - 1
     stdout:
     - '/etc\/pam.d\/common-password:password\s*required\s*pam_pwhistory.so.*use_authtok/'
-    - '/etc\/pam.d\/common-password-pc:passwords\*required\s*pam_pwhistory.so.*use_authtok/'
+    - '/etc\/pam.d\/common-password-pc:password\s*required\s*pam_pwhistory.so.*use_authtok/'
     meta:
       server: 1
       workstation: 1
