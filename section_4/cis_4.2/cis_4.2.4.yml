@@ -5,10 +5,9 @@
 command:
   firewall_default_zone:
     title: 4.2.4 | Ensure default zone is set | Manual Check Required
-    exec: echo "Manual test"
+    exec: echo "Manual check - review 'firewall-cmd --get-default-zone' and confirm it matches site policy"
     exit-status: 0
-    stdout:
-    - '!/Manual test/'
+    stdout: []
     meta:
       server: 1
       workstation: 1

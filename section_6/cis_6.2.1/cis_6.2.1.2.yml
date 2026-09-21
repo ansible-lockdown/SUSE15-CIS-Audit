@@ -8,7 +8,7 @@ command:
     exec: grep -HEn ^f /usr/lib/tmpfiles.d/systemd.conf /etc/tmpfiles.d/systemd.conf | awk -F' ' '($3> 640){print $1" "$2" "$3}'
     exit-status: 0
     stdout:
-    - '!/^\d*/'
+    - '!/./'
     meta:
       server: 1
       workstation: 1
