@@ -664,6 +664,11 @@ suse15cis_sshd_deny_groups: ''
 suse15cis_sshd_client_alive_interval: 15
 suse15cis_sshd_client_alive_count_max: 3
 
+## Control 5.2.4
+# Users whose NOPASSWD sudo rules are accepted. The remediation role passes its
+# suse15cis_sudoers_exclude_nopasswd_list here; empty means no exceptions.
+suse15cis_sudoers_exclude_nopasswd_list: []
+
 ## Control 5.2.7
 # This variable determines the group of users that are allowed to use the su command.
 # one to specify a user group that is allowed to use the "su" command.

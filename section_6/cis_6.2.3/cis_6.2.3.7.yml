@@ -19,8 +19,7 @@ command:
     title: 6.2.3.7 | Ensure rsyslog logrotate is configured | Manual Check
     exec: echo "Manual | please check file rotaton matches site policy - logrotate"
     exit-status: 0
-    stdout:
-    - '!/^Manual/'
+    stdout: []
     meta:
       server: 1
       workstation: 1

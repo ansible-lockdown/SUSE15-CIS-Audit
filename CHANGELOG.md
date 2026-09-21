@@ -1,6 +1,60 @@
 # Changes to SUSE15-CIS-Audit
-
 # Based on CIS v2.0.1
+
+## September 2026 - assertions that could never pass
+
+- 5.2.4 NOPASSWD entries for suse15cis_sudoers_exclude_nopasswd_list users accepted
+- 6.3.4.4 accepted (adm|root); the benchmark says root or audit
+- 4.2.2, 4.2.3, 4.2.4 asserted stdout did not contain the text they echo
+- 2.1.23 and 7.1.13 asserted no output from commands that always produce some
+- 6.2.3.7 asserted stdout did not start with the word it echoes
+- manual checks now use stdout: [] and carry an actionable message
+- 6.2.1.2 pattern was !/^\d*/, which matches every line; now !/./
+- 5.3.2.3.3 second pattern read passwords\*required; now password\s*required
+- 2.3.3.1 pointed at /etc/chrony/sources.d and /etc/sysconfig/chrony; now /etc/chrony.d and /etc/sysconfig/chronyd
+
+# August 2026: Alignment with CIS v2.0.1
+## August 2026: QA pass fixes
+
+- CONTRIBUTING.rst replaced with the canonical CONTRIBUTING.md and a README Contributing
+  section added
+
+- 2.3.3.1 and 2.3.3.2 gated on suse15cis_time_sync_tool "chrony"; the variable is
+  "chronyd", so both controls emitted zero assertions in a real audit run
+- 5.1.7 asserted AllowUsers/AllowGroups/DenyUsers/DenyGroups unconditionally while
+  remediation writes each only when its variable is set, so the control always failed.
+  The assertions are now gated, and the four variables are '' rather than YAML null
+- 6.2.3.3 carried CIS_ID 6.2.3.2
+- 5.4.2.4 accepted only a set password (P); CIS also allows a locked root account (L)
+- 1.5.2 negative assertion had a stray / after .*: and could never fire
+- 3.3.11 used net\.ipv6\conf\. instead of net\.ipv6\.conf\.
+- 1.8.2 to 1.8.10 additionally gated on suse15cis_desktop_required, which remediation
+  does not use. goss.yml also gated the whole section_1/cis_1.8 glob on the same
+  variable, so with the default false the directory was excluded outright. Both the
+  per-file gates and the glob gate are removed; each file gates on suse15cis_gui, as
+  remediation does
+- vars/CIS.yml: nfs_server and rpc_server were false against remediation's true, which
+  inverted the 2.1.10 and 2.1.13 gates in a standalone run
+- vars/CIS.yml: removed an Ansible Jinja expression goss cannot template, and four
+  variables no test references
+- .gitignore held only .github/; replaced with the standard Lockdown set
+- update vars with company_title: 'MindPoint Group - A Quantum Sky Company'
+- removed standalone file
+
+### Titles
+- Goss titles resynced to the v2.0.1 benchmark across 20 files, including
+  1.2.1.2, 1.2.1.4, 2.1.6, 2.1.13, 2.2.3, 2.3.1.1, 2.4.1.2-2.4.1.7, 3.3.3,
+  3.3.10, 5.1.1, 5.1.2, 5.1.3, 5.1.8, 5.4.2.5 and 6.3.3.7
+
+### Profiles
+- meta server/workstation corrected on 13 blocks: 1.1.1.9, 1.8.7, 2.1.12, 2.1.21,
+  2.2.2, 3.1.1, 3.1.2, 5.1.10, 5.3.2.1.3, 5.4.1.2
+- Level gates raised to level_2 on 2.1.21, 2.2.2, 5.3.2.1.3 and 5.4.1.2, which the
+  benchmark lists as Level 2 for both Server and Workstation
+- 1.8.6, 1.8.7, 2.1.1, 2.1.2 and 3.1.3 are Level 1 - Server and Level 2 -
+  Workstation. Their gates are deliberately held at level_1: gating on the higher
+  of the two levels would stop a Level 1 Server audit checking controls a Level 1
+  Server has to meet
 
 # 2026 July — QA pass: goss update
 
@@ -22,3 +76,64 @@
 - Contributing added
 - updated run_audit.sh for less risk of incorrect OS being discovered
 - suse15cis_firewall variable renamed to suse15cis_firewall_package inline with remediation
+
+
+## February 2026: QA Fixes
+
+### README.md
+- Fixed "Suse" to "SUSE" (proper acronym) in title and benchmark reference
+- Fixed "This repository is set of" to "This repository is a set of" (missing article)
+- Capitalized "## variables" heading to "## Variables"
+- Fixed "can be turned on/off or section" to "can be turned on/off per section"
+- Fixed "so maybe different" to "so it may be different" (grammar)
+- Fixed "remedation" typo to "remediation"
+- Fixed "Fot" typo to "For"
+- Fixed broken markdown link reference for goss documentation (removed erroneous parentheses)
+
+### run_audit.sh
+- Fixed "Script need to run" to "Script needs to run" (subject-verb agreement)
+- Fixed "does not met minimum" to "does not meet minimum" (verb tense)
+
+### vars/CIS.yml
+- Fixed comment "cryptopolicy" to "Crypto Policy" (section 1.6 heading)
+- Fixed section comment "# 1.7" to "# 1.8" for GNOME Display Manager rules (rules are 1.8.x)
+- Fixed "pam_quality" to "pam_pwquality" (correct PAM module name, section 5.3.2.2)
+- Fixed "This are added" to "These are added" (grammar, section 5.3.2.3)
+- Fixed comment "# 5.4.2" to "# 5.4.3" for user default environment (rules are 5.4.3.x)
+- Fixed comments "# 6.2.1" to "# 6.3.1" for auditd services (rules are 6.3.1.x)
+- Fixed comments "# 6.2.2" to "# 6.3.2" for auditd data retention (rules are 6.3.2.x)
+- Fixed comments "# 6.2.3" to "# 6.3.3" for auditd rules (rules are 6.3.3.x)
+- Fixed comments "# 6.2.4" to "# 6.3.4" for audit file access (rules are 6.3.4.x)
+- Fixed "Noe that" typo to "Note that" (banner text comment)
+- Fixed "choses" typo to "chooses" (time sync tool comment)
+- Fixed "list of of" to "list of" (duplicate word, 2 occurrences in time server comments)
+- Fixed "if exists not changes take place" to "if it exists, no changes take place" (2 occurrences)
+- Fixed "dependancy" typo to "dependency" (2 occurrences)
+- Fixed "managaed" typo to "managed" (bluetooth service comment)
+- Fixed "This control managed" to "This control manages" (bluetooth comment grammar)
+- Fixed "aline" typo to "alive" (SSH client alive interval comment)
+- Fixed "can must be" to "must be" (AIDE cron day comment)
+- Fixed "can must be" to "must be" (AIDE cron month comment)
+- Fixed "shoud" typo to "should" (journal config comment)
+- Fixed "parctice" typo to "practice" (journald config comment)
+
+### goss.yml
+- Fixed missing `: {}` on section_1/cis_1.8/*.yml gossfile entry (syntax consistency)
+
+### Section YAML Files - Spelling Fixes
+- section_3/cis_3.3/cis_3.3.11.yml: Fixed "acceptedd" to "accepted" (2 occurrences)
+- section_6/cis_6.2.3/cis_6.2.3.1.2.yml: Fixed "recieve" to "receive" (2 occurrences)
+- section_3/cis_3.3/cis_3.3.10.yml: Standardized "syn Cookies"/"synCookies" to "SYN Cookies"
+
+### Section YAML Files - CIS ID Corrections
+- section_2/cis_2.1/cis_2.1.22.yml: Added missing "|" pipe separator in title
+- section_1/cis_1.2.x/cis_1.2.1.2.yml: Fixed incorrect CIS number "1.2.2" to "1.2.1.2" in title
+- section_5/cis_5.1/cis_5.1.8.yml: Fixed incorrect CIS number "5.1.5" to "5.1.8" in title and CIS_ID meta
+
+### YAML Lint Summary
+- All 287 section YAML files report syntax errors from Go template expressions ({{ }}) -
+  this is expected behavior for Goss template files and not actual YAML errors
+- standalone.yml has a similar template-related syntax error at line 3 (expected)
+- 163 indentation warnings across section files (inherent to the Goss template structure)
+- 2 line-length warnings: cis_1.3.1.3.yml (line 9, 336 chars) and cis_7.2.8.yml (line 26, 262 chars)
+- vars/CIS.yml passes YAML lint cleanly

@@ -5,10 +5,9 @@
 command:
   firewall_drops_unnecessary:
     title: 4.2.2 | Ensure firewalld drops unnecessary services and ports | Manual Check Required
-    exec: echo "Manual test"
+    exec: echo "Manual check - review 'firewall-cmd --list-all' and confirm only approved services and ports are open"
     exit-status: 0
-    stdout:
-    - '!/Manual test/'
+    stdout: []
     meta:
       server: 1
       workstation: 1

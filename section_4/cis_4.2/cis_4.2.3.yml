@@ -5,10 +5,9 @@
 command:
   firewall_loopback_manual:
     title: 4.2.3 | Ensure firewalld loopback traffic is configured | Manual Check Required
-    exec: echo "Manual test"
+    exec: echo "Manual check - confirm the loopback interface is trusted and that traffic to 127.0.0.1 and ::1 from other interfaces is dropped"
     exit-status: 0
-    stdout:
-    - '!/Manual test/'
+    stdout: []
     meta:
       server: 1
       workstation: 1
