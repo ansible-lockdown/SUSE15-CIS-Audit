@@ -39,6 +39,7 @@
   variables no test references
 - .gitignore held only .github/; replaced with the standard Lockdown set
 - update vars with company_title: 'MindPoint Group - A Quantum Sky Company'
+- removed standalone file
 
 ### Titles
 - Goss titles resynced to the v2.0.1 benchmark across 20 files, including
