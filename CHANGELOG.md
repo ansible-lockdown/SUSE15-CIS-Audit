@@ -2,6 +2,7 @@
 
 ## September 2026 - assertions that could never pass
 
+- 5.2.4 NOPASSWD entries for suse15cis_sudoers_exclude_nopasswd_list users accepted
 - 6.3.4.4 accepted (adm|root); the benchmark says root or audit
 - 4.2.2, 4.2.3, 4.2.4 asserted stdout did not contain the text they echo
 - 2.1.23 and 7.1.13 asserted no output from commands that always produce some
