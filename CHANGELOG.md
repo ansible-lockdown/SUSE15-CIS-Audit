@@ -1,4 +1,5 @@
 # Changes to SUSE15-CIS-Audit
+# Based on CIS v2.0.1
 
 ## September 2026 - assertions that could never pass
 
@@ -12,7 +13,7 @@
 - 5.3.2.3.3 second pattern read passwords\*required; now password\s*required
 - 2.3.3.1 pointed at /etc/chrony/sources.d and /etc/sysconfig/chrony; now /etc/chrony.d and /etc/sysconfig/chronyd
 
-# Based on CIS v2.0.1
+
 
 # 2026 July — QA pass: goss update
 
