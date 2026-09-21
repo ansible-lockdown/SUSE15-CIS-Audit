@@ -1,6 +1,7 @@
 ChangeLog - SUSE15-CIS-Audit
 =============================
 
+## August 2026: Alignment with CIS v2.0.1
 ## August 2026: QA pass fixes
 
 - CONTRIBUTING.rst replaced with the canonical CONTRIBUTING.md and a README Contributing
@@ -25,8 +26,6 @@ ChangeLog - SUSE15-CIS-Audit
 - vars/CIS.yml: removed an Ansible Jinja expression goss cannot template, and four
   variables no test references
 - .gitignore held only .github/; replaced with the standard Lockdown set
-
-## August 2026: Alignment with CIS v2.0.1
 
 ### Titles
 - Goss titles resynced to the v2.0.1 benchmark across 20 files, including
