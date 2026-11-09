@@ -2,16 +2,16 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_6_2_2_1_2 }}
-file:
+command:
   journald_remote_config:
     title: 6.2.2.1.2 | Ensure systemd-journal-upload authentication is configured
-    path: /etc/systemd/journal-upload.conf
-    exists: true
-    contents:
-    - '/^URL=/'
-    - '/ServerKeyFile=.*.pem'
-    - '/ServerCertificateFile=.*.pem'
-    - '/TrustedCertificateFile=.*.pem'
+    exec: systemd-analyze cat-config systemd/journal-upload.conf
+    exit-status: 0
+    stdout:
+    - '/^\s*URL=\S+/'
+    - '/^\s*ServerKeyFile=\S+/'
+    - '/^\s*ServerCertificateFile=\S+/'
+    - '/^\s*TrustedCertificateFile=\S+/'
     meta:
       server: 1
       workstation: 1

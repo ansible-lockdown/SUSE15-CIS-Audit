@@ -13,7 +13,7 @@
       mode: "0600"
       contents:
       - '/^\s*set superusers={{ .Vars.suse15cis_grub_user }}/'
-      - '/^\s*password_pbkdf2.*\s{{ .Vars.suse15cis_bootloader_password_hash }}\'
+      - '/^\s*password_pbkdf2.*\s{{ .Vars.suse15cis_bootloader_password_hash }}/'
       meta:
         server: 1
         workstation: 1
