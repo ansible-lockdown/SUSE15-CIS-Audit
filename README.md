@@ -80,7 +80,7 @@ README Links
 [Centre For Internet Security]: https://www.cisecurity.org
 [Read the Docs - Audit]: https://ansible-lockdown.readthedocs.io/en/latest/audit/getting-started-audit.html
 
-[goss documentation]: https://github.com/krameff/goss/blob/master/README.md
+[goss documentation]: https://github.com/krameff/goss/blob/devel/docs/index.md
 
 [Goss]: https://github.com/krameff/goss/blob/devel/docs/index.md
 [DISA STIG]: https://public.cyber.mil/stigs

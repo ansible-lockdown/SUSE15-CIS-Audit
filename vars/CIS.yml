@@ -682,8 +682,11 @@ suse15cis_use_pam_config: true
 
 # 5.4.1.x login.defs password settings
 suse15cis_pass_max_days: "365"
+suse15cis_force_user_maxdays: false
 suse15cis_pass_min_days: "1"
+suse15cis_force_user_mindays: false
 suse15cis_pass_warn_age: "7"
+suse15cis_force_user_warnage: false
 
 ##
 ## Section 6 Control Variables
@@ -760,7 +763,7 @@ suse15cis_journald_runtimekeepfree: 100G
 # Current variable governs the settings for log retention(how long the log files will be kept).
 # Thus, it specifies the maximum time to store entries in a single journal
 # file before rotating to the next one. Set to 0 to turn off this feature.
-# The given values is interpreted as seconds, unless suffixed with the units
+# The given value is interpreted as seconds, unless suffixed with the units
 # `year`, `month`, `week`, `day`, `h` or `m` to override the default time unit of seconds.
 # Values are Xm, Xh, Xday, Xweek, Xmonth, Xyear, for example 2week is two weeks
 # ATTENTION: Uncomment the keyword below when values are set!
