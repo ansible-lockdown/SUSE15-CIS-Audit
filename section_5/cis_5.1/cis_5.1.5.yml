@@ -5,14 +5,12 @@
 command:
   sshd_KEX:
     title: 5.1.5 | Ensure sshd KexAlgorithms is configured
-    exec: sshd -T | grep ^kex
-    exit-status:
-      or:
-      - 0
-      - 1
+    exec: sshd -T | grep -i '^kexalgorithms'
+    exit-status: 0
     stdout:
+    - '/(?i)^kexalgorithms\s/'
     {{ range .Vars.suse15cis_sshd_weak_kex }}
-    - '!/^KexAlgorithms.*!{{ . }}/'
+    - '!/(?i)^kexalgorithms\s(.*,)?{{ . }}(,|$)/'
     {{ end }}
     meta:
       server: 1

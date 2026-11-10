@@ -1,4 +1,25 @@
 # Changes to SUSE15-CIS-Audit
+
+## CIS Benchmark 2.0.1
+
+## November 2026 - QA fixes
+
+- 5.1.7 rebuilt, invalid YAML stopped the whole audit
+- 1.1.1.1-1.1.1.5 expect install /bin/true or /bin/false
+- 1.1.2.7.4, 1.4.1, 1.6.6, 1.6.7 regex closing slash added
+- 1.2.1.3 checks repos.d for repo_gpgcheck disabled
+- 5.1.3 public host key checks fixed, mode mask 0133
+- 5.1.5 weak KEX check matches sshd -T output
+- 5.1.8 conf.d Banner grep fixed
+- 5.3.2.4.2 remember check fixed
+- 5.4.1.1-5.4.1.3 per-user checks list violators, skipped when force_user_* is false
+- 5.4.2.6 /root/.bashrc path
+- 6.2.2.1.2, 6.2.3.4 read systemd-analyze cat-config
+- 6.3.1.2, 6.3.1.3 grub regexes fixed
+- 7.2.4-7.2.7 sort before uniq -d
+- run_audit.sh OS name and version fallbacks
+- goss documentation link updated
+
 # Based on CIS v2.0.1
 
 ## September 2026 - assertions that could never pass
