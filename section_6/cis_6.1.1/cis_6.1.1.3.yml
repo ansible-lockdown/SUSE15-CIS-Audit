@@ -1,0 +1,23 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_6_1_1_3 }}
+command:
+  journald_syslog:
+    title: 6.1.1.3 | Ensure journald ForwardToSyslog is disabled
+    exec: systemd-analyze cat-config systemd/journald.conf | grep -Pi '^\h*ForwardToSyslog\h*=' | tail -n 1
+    exit-status: 0
+    stdout:
+    - '/(?i)^\s*ForwardToSyslog\s*=\s*no\s*$/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.1.1.3
+      NIST800-53R5:
+      - AU-2
+      - AU-6
+      - AU-7
+      - AU-12
+  {{ end }}
+{{ end }}

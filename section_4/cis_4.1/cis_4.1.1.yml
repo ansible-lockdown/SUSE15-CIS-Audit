@@ -2,111 +2,18 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_4_1_1 }}
-    {{ if eq .Vars.suse15cis_firewall_package "nftables" }}
-file:
-  firewalld_masked:
-    title: 4.1.1 | Ensure a single firewall configuration utility is in use | firewalld masked
-    path: /etc/systemd/system/firewalld.service
-    filetype: symlink
-    linked-to: /dev/null
-    exists: true
+    {{ if eq .Vars.suse15cis_firewall_package "firewalld" }}
+package:
+  firewalld:
+    title: 4.1.1 | Ensure firewalld is installed
+    installed: true
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 4.1.1
       NIST800-53R5:
-      - NA
-service:
-  firewalld_stopped:
-    title: 4.1.1 | Ensure a single firewall configuration utility is in use | firewalld service stopped
-    name: firewalld
-    enabled: false
-    running: false
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 4.1.1
-      NIST800-53R5:
-      - NA
-  nftables_running:
-    title: 4.1.1 | Ensure a single firewall configuration utility is in use | nftables running
-    name: nftables
-    enabled: true
-    running: true
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 4.1.1
-      NIST800-53R5:
-      - NA
-  iptables_stopped:
-    title: 4.1.1 | Ensure a single firewall configuration utility is in use | iptables stopped
-    name: iptables
-    enabled: true
-    running: true
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 4.1.1
-      NIST800-53R5:
-      - NA
-  {{ end }}
-  {{ if eq .Vars.suse15cis_firewall_package "firewalld" }}
-file:
-  nftables_masked:
-    title: 4.1.1 | Ensure a single firewall configuration utility is in use | nftables masked
-    path: /etc/systemd/system/nftables.service
-    filetype: symlink
-    linked-to: /dev/null
-    exists: true
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 4.1.1
-      NIST800-53R5:
-      - NA
-service:
-  firewalld_started:
-    title: 4.1.1 | Ensure a single firewall configuration utility is in use | firewalld running and enabled
-    name: firewalld
-    enabled: true
-    running: true
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 4.1.1
-      NIST800-53R5:
-      - NA
-  nftables_stopped:
-    title: 4.1.1 | Ensure a single firewall configuration utility is in use | nftables stopped
-    name: nftables
-    enabled: false
-    running: false
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 4.1.1
-      NIST800-53R5:
-      - NA
-  iptables_stopped:
-    title: 4.1.1 | Ensure a single firewall configuration utility is in use | iptables stopped
-    name: iptables
-    enabled: false
-    running: false
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 4.1.1
-      NIST800-53R5:
-      - NA
+      - SC-7
     {{ end }}
   {{ end }}
 {{ end }}

@@ -1,11 +1,12 @@
 ---
 
 {{ if .Vars.suse15cis_level_1 }}
-  {{ if .Vars.run_heavy_tests }}
-    {{ if .Vars.suse15cis_rule_1_2_1_4 }}
+  {{ if .Vars.suse15cis_rule_1_2_1_4 }}
 command:
   repos_configured:
     title: 1.2.1.4 | Ensure package manager repositories are configured
+    skip: {{ not .Vars.run_heavy_tests }}
+    skip-reason: heavy tests are off, run_heavy_tests is false
     exit-status: 0
     exec: "zypper repos"
     meta:
@@ -14,6 +15,5 @@ command:
       CIS_ID:
       - 1.2.1.4
       NIST800-53R5: SI-2
-    {{ end }}
   {{ end }}
 {{ end }}

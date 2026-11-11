@@ -5,6 +5,8 @@
 file:
   cron_monthly_perms:
     title: 2.4.1.6 | Ensure access to /etc/cron.monthly is configured
+    skip: {{ not .Discovered.cron_installed }}
+    skip-reason: cron is not installed, cron package absent
     path: /etc/cron.monthly
     exists: true
     owner: root

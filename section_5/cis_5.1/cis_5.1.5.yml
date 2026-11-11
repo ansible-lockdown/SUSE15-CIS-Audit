@@ -3,21 +3,23 @@
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_5_1_5 }}
 command:
-  sshd_KEX:
-    title: 5.1.5 | Ensure sshd KexAlgorithms is configured
-    exec: sshd -T | grep -i '^kexalgorithms'
+  sshd_banner:
+    title: 5.1.5 | Ensure sshd Banner is configured
+    exec: "sshd -T 2>/dev/null | grep -Ei '^banner[[:space:]]'"
     exit-status: 0
     stdout:
-    - '/(?i)^kexalgorithms\s/'
-    {{ range .Vars.suse15cis_sshd_weak_kex }}
-    - '!/(?i)^kexalgorithms\s(.*,)?{{ . }}(,|$)/'
-    {{ end }}
+    - '/(?i)^banner\s+\/\S+/'
+    - '!/(?i)^banner\s+none$/'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 5.1.5
       NIST800-53R5:
-      - SC-8
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
   {{ end }}
 {{ end }}

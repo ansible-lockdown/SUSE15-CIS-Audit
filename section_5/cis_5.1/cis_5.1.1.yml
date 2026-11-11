@@ -4,7 +4,7 @@
   {{ if .Vars.suse15cis_rule_5_1_1 }}
 file:
   sshd_config_perms:
-    title: 5.1.1 | Ensure access to /etc/ssh/sshd_config is configured
+    title: 5.1.1 | Ensure access to sshd_config files is configured | sshd_config
     path: /etc/ssh/sshd_config
     exists: true
     mode:
@@ -13,6 +13,28 @@ file:
       - '0600'
     owner: root
     group: root
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.1.1
+      NIST800-53R5:
+      - AC-3
+      - MP-2
+command:
+  sshd_config_files_perms:
+    title: 5.1.1 | Ensure access to sshd_config files is configured | vendor file and drop-ins
+    exec: |
+      for l_file in /usr/etc/ssh/sshd_config; do
+        [ -e "$l_file" ] && find -L "$l_file" -maxdepth 0 \( -perm /177 -o ! -user root -o ! -group root \) -printf 'FAIL: %p\n'
+      done
+      for l_dir in /etc/ssh/sshd_config.d /usr/etc/ssh/sshd_config.d; do
+        [ -d "$l_dir" ] && find "$l_dir" -xdev -type f -name '*.conf' \( -perm /077 -o ! -user root -o ! -group root \) -printf 'FAIL: %p\n'
+      done
+      true
+    exit-status: 0
+    stdout:
+    - '!/^FAIL:/'
     meta:
       server: 1
       workstation: 1

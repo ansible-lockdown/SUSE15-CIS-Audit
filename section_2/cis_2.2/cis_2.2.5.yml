@@ -1,11 +1,12 @@
 ---
 
-{{ if not .Vars.suse15cis_tftp_client }}
-  {{ if .Vars.suse15cis_level_1 }}
-    {{ if .Vars.suse15cis_rule_2_2_5 }}
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_2_2_5 }}
 package:
   tftp-client:
     title: 2.2.5 | Ensure tftp client is not installed
+    skip: {{ .Vars.suse15cis_tftp_client }}
+    skip-reason: a TFTP client is required, suse15cis_tftp_client is true
     name: tftp
     installed: false
     meta:
@@ -14,6 +15,5 @@ package:
       CIS_ID: 2.2.5
       NIST800-53R5:
       - CM-7
-    {{ end }}
   {{ end }}
 {{ end }}

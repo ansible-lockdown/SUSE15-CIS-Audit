@@ -1,0 +1,55 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_5_3_2_3 }}
+file:
+  pam_unix_enabled_common_auth:
+    title: 5.3.2.3 | Ensure pam_unix module is enabled | common-auth
+    path: /etc/pam.d/common-auth
+    exists: true
+    contents:
+    - '/^\s*auth\s+\S+\s+pam_unix\.so\b/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.3.2.3
+      NIST800-53R5: IA-5
+  pam_unix_enabled_common_account:
+    title: 5.3.2.3 | Ensure pam_unix module is enabled | common-account
+    path: /etc/pam.d/common-account
+    exists: true
+    contents:
+    - '/^\s*account\s+\S+\s+pam_unix\.so\b/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.3.2.3
+      NIST800-53R5: IA-5
+  pam_unix_enabled_common_password:
+    title: 5.3.2.3 | Ensure pam_unix module is enabled | common-password
+    path: /etc/pam.d/common-password
+    exists: true
+    contents:
+    - '/^\s*password\s+\S+\s+pam_unix\.so\b/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.3.2.3
+      NIST800-53R5: IA-5
+  pam_unix_enabled_common_session:
+    title: 5.3.2.3 | Ensure pam_unix module is enabled | common-session
+    path: /etc/pam.d/common-session
+    exists: true
+    contents:
+    - '/^\s*session\s+\S+\s+pam_unix\.so\b/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.3.2.3
+      NIST800-53R5: IA-5
+  {{ end }}
+{{ end }}

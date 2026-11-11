@@ -1,11 +1,12 @@
 ---
 
-{{ if not .Vars.suse15cis_ftp_client }}
-  {{ if .Vars.suse15cis_level_1 }}
-    {{ if .Vars.suse15cis_rule_2_2_1 }}
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_2_2_1 }}
 package:
   ftp_client:
     title: 2.2.1 | Ensure ftp client is not installed
+    skip: {{ .Vars.suse15cis_ftp_client }}
+    skip-reason: an FTP client is required, suse15cis_ftp_client is true
     installed: false
     name: ftp
     meta:
@@ -15,6 +16,5 @@ package:
       NIST800-53R5:
       - CM-7
       - CM-11
-    {{ end }}
   {{ end }}
 {{ end }}

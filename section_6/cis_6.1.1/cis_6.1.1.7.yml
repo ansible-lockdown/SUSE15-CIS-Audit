@@ -1,0 +1,24 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_6_1_1_7 }}
+command:
+  /etc/tmpfiles.d/systemd.conf:
+    title: 6.1.1.7 | Ensure journald log file access is configured | Manual Check Required
+    exec: grep -HEn ^f /usr/lib/tmpfiles.d/systemd.conf /etc/tmpfiles.d/systemd.conf | awk -F' ' '($3> 640){print $1" "$2" "$3}'
+    exit-status: 0
+    stdout:
+    - '!/./'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.1.1.7
+      NIST800-53R5:
+      - AC-3
+      - AU-2
+      - AU-12
+      - MP-2
+      - SI-5
+  {{ end }}
+{{ end }}

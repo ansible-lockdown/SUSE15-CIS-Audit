@@ -5,6 +5,8 @@
 file:
   at_deny_absent:
     title: 2.4.2.1 | Ensure access to at is configured
+    skip: {{ not .Discovered.at_installed }}
+    skip-reason: at is not installed, at package absent
     path: /etc/at.deny
     exists: false
     meta:
@@ -17,6 +19,8 @@ file:
       - MP-2
   /etc/at.allow:
     title: 2.4.2.1 | Ensure access to at is configured
+    skip: {{ not .Discovered.at_installed }}
+    skip-reason: at is not installed, at package absent
     exists: true
     owner: root
     group: root

@@ -3,23 +3,20 @@
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_5_1_4 }}
 command:
-  sshd_ciphers:
-    title: 5.1.4 | Ensure sshd Ciphers are configured
-    exec: sshd -T | grep ciphers
-    exit-status:
-      or:
-      - 0
-      - 1
+  sshd_access_limited:
+    title: 5.1.4 | Ensure sshd access is configured
+    exec: "sshd -T 2>/dev/null | grep -Ei '^(allow|deny)(users|groups)[[:space:]]'"
+    exit-status: 0
     stdout:
-    {{ range .Vars.suse15cis_sshd_weak_ciphers }}
-    - '!/(?i)^Ciphers.*{{ . }}/'
-    {{ end }}
+    - '/(?i)^(allow|deny)(users|groups)\s+\S+/'
+    skip: {{ if or .Vars.suse15cis_sshd_allow_users .Vars.suse15cis_sshd_allow_groups .Vars.suse15cis_sshd_deny_users .Vars.suse15cis_sshd_deny_groups }}false{{ else }}true{{ end }}
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 5.1.4
       NIST800-53R5:
-      - SC-8
+      - AC-3
+      - MP-2
   {{ end }}
 {{ end }}

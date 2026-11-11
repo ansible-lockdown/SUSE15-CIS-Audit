@@ -1,11 +1,12 @@
 ---
 
-{{ if not .Vars.suse15cis_telnet_required }}
-  {{ if .Vars.suse15cis_level_1 }}
-    {{ if .Vars.suse15cis_rule_2_2_4 }}
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_2_2_4 }}
 package:
   telnet:
     title: 2.2.4 | Ensure telnet client is not installed | telnet
+    skip: {{ .Vars.suse15cis_telnet_required }}
+    skip-reason: a telnet client is required, suse15cis_telnet_required is true
     installed: false
     name: telnet
     meta:
@@ -15,6 +16,5 @@ package:
       NIST800-53R5:
       - CM-7
       - CM-11
-    {{ end }}
   {{ end }}
 {{ end }}

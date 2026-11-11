@@ -1,0 +1,35 @@
+---
+
+{{ if .Vars.suse15cis_level_2 }}
+  {{ if .Vars.suse15cis_rule_6_2_3_1 }}
+command:
+  auditd_admin_scope_cnf:
+    title: 6.2.3.1 | Ensure modification of the /etc/sudoers file is collected | Config
+    exec: 'grep -Phs -- ''/etc/sudoers'' /etc/audit/rules.d/*.rules'
+    exit-status: 0
+    stdout:
+    - '/^\s*(-w /etc/sudoers/? -p wa -k scope|-a (always,exit|exit,always)( -F arch=b(32|64))? -S all -F (path|dir)=/etc/sudoers/? -F perm=wa (-k |-F key=)scope)\s*$/'
+    - '/^\s*(-w /etc/sudoers\.d/? -p wa -k scope|-a (always,exit|exit,always)( -F arch=b(32|64))? -S all -F (path|dir)=/etc/sudoers\.d/? -F perm=wa (-k |-F key=)scope)\s*$/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.1
+      NIST800-53R5:
+      - AU-3
+  auditd_admin_scope_live:
+    title: 6.2.3.1 | Ensure modification of the /etc/sudoers file is collected | Live
+    exec: 'auditctl -l | grep -P -- ''/etc/sudoers'''
+    exit-status: 0
+    stdout:
+    - '/^\s*(-w /etc/sudoers/? -p wa -k scope|-a (always,exit|exit,always)( -F arch=b(32|64))? -S all -F (path|dir)=/etc/sudoers/? -F perm=wa (-k |-F key=)scope)\s*$/'
+    - '/^\s*(-w /etc/sudoers\.d/? -p wa -k scope|-a (always,exit|exit,always)( -F arch=b(32|64))? -S all -F (path|dir)=/etc/sudoers\.d/? -F perm=wa (-k |-F key=)scope)\s*$/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.1
+      NIST800-53R5:
+      - AU-3
+  {{ end }}
+{{ end }}

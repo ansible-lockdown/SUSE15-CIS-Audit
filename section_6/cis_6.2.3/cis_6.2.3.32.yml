@@ -1,0 +1,37 @@
+---
+
+{{ if .Vars.suse15cis_level_2 }}
+  {{ if .Vars.suse15cis_rule_6_2_3_32 }}
+command:
+  auditd_init_module_cnf:
+    title: 6.2.3.32 | Ensure kernel "init_module" and "finit_module" loading unloading and modification is collected | Config
+    exec: 'grep -Phs -- ''init_module'' /etc/audit/rules.d/*.rules'
+    exit-status: 0
+    stdout:
+    - '/-a (always,exit|exit,always) -F arch=b64 -S init_module,finit_module -F auid>=1000 -F auid!=(unset|4294967295|-1) (-k |-F key=)kernel_modules/'
+    - '/-a (always,exit|exit,always) -F arch=b32 -S init_module,finit_module -F auid>=1000 -F auid!=(unset|4294967295|-1) (-k |-F key=)kernel_modules/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.32
+      NIST800-53R5:
+      - AU-3
+      - CM-6
+  auditd_init_module_live:
+    title: 6.2.3.32 | Ensure kernel "init_module" and "finit_module" loading unloading and modification is collected | Live
+    exec: 'auditctl -l | grep -P -- ''init_module'''
+    exit-status: 0
+    stdout:
+    - '/-a always,exit -F arch=b64 -S init_module,finit_module -F auid>=1000 -F auid!=(unset|4294967295|-1) -F key=kernel_modules/'
+    - '/-a always,exit -F arch=b32 -S init_module,finit_module -F auid>=1000 -F auid!=(unset|4294967295|-1) -F key=kernel_modules/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.32
+      NIST800-53R5:
+      - AU-3
+      - CM-6
+  {{ end }}
+{{ end }}

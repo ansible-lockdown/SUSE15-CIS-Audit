@@ -1,0 +1,32 @@
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_6_1_1_2 }}
+service:
+  systemd-journal-remote.socket:
+    title: 6.1.1.2 | Ensure systemd-journal-remote service is not in use
+    running: false
+    enabled: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.1.1.2
+      NIST800-53R5:
+      - AU-2
+      - AU-7
+      - AU-12
+  systemd-journal-remote.service:
+    title: 6.1.1.2 | Ensure systemd-journal-remote service is not in use
+    running: false
+    enabled: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.1.1.2
+      NIST800-53R5:
+      - AU-2
+      - AU-7
+      - AU-12
+  {{ end }}
+{{ end }}

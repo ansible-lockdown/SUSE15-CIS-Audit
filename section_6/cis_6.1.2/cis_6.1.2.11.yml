@@ -1,0 +1,18 @@
+---
+
+{{ if .Vars.suse15cis_level_2 }}
+  {{ if .Vars.suse15cis_rule_6_1_2_11 }}
+command:
+  rsyslog_ca_cert:
+    title: 6.1.2.11 | Ensure rsyslog CA certificates are configured
+    exec: grep -Phsi -- 'DefaultNetstreamDriverCAFile' /etc/rsyslog.conf /etc/rsyslog.d/*
+    exit-status: 0
+    stdout:
+    - '/(?i)DefaultNetstreamDriverCAFile\s*=\s*"?\/\S+/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.1.2.11
+  {{ end }}
+{{ end }}

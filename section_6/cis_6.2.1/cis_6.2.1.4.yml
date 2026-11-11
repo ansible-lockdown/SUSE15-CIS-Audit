@@ -1,51 +1,21 @@
 ---
 
-{{ if .Vars.suse15cis_level_1 }}
+{{ if .Vars.suse15cis_level_2 }}
   {{ if .Vars.suse15cis_rule_6_2_1_4 }}
 service:
-    {{ if eq .Vars.suse15cis_syslog "journald" }}
-  only_journald_installed_pkg:
-    title: 6.2.1.4 | Ensure only one logging system is in use | journald
-    name: systemd-journald.service
+  auditd_service:
+    title: 6.2.1.4 | Ensure auditd service is enabled and active
+    name: auditd.service
+    enabled: true
     running: true
     meta:
-      server: 1
-      workstation: 1
+      server: 2
+      workstation: 2
       CIS_ID:
       - 6.2.1.4
-      NIST800-53R5: NA
-  only_journald_installed_no_rsyslog:
-    title: 6.2.1.4 | Ensure only one logging system is in use | journald
-    name: rsyslog
-    running: false
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 6.2.1.4
-      NIST800-53R5: NA
-    {{ end }}
-    {{ if eq .Vars.suse15cis_syslog "rsyslog" }}
-  only_rsyslog_installed_pkg:
-    title: 6.2.1.4 | Ensure only one logging system is in use | rsyslog
-    name: systemd-journald.service
-    running: false
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 6.2.1.4
-      NIST800-53R5: NA
-  only_rsyslog_installed_no_journald:
-    title: 6.2.1.4 | Ensure only one logging system is in use | rsyslog
-    name: rsyslog
-    running: true
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 6.2.1.4
-      NIST800-53R5: NA
-    {{ end }}
+      NIST800-53R5:
+      - AU-2
+      - AU-12
+      - SI-5
   {{ end }}
 {{ end }}

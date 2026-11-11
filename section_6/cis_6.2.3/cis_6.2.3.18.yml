@@ -1,0 +1,37 @@
+---
+
+{{ if .Vars.suse15cis_level_2 }}
+  {{ if .Vars.suse15cis_rule_6_2_3_18 }}
+command:
+  auditd_perm_mod_chmod_cnf:
+    title: 6.2.3.18 | Ensure discretionary access control permission modification events chmod,fchmod,fchmodat are collected | Config
+    exec: 'grep -Phs -- ''chmod'' /etc/audit/rules.d/*.rules'
+    exit-status: 0
+    stdout:
+    - '/-a (always,exit|exit,always) -F arch=b64 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=(unset|4294967295|-1) (-k |-F key=)perm_mod/'
+    - '/-a (always,exit|exit,always) -F arch=b32 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=(unset|4294967295|-1) (-k |-F key=)perm_mod/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.18
+      NIST800-53R5:
+      - AU-3
+      - CM-6
+  auditd_perm_mod_chmod_live:
+    title: 6.2.3.18 | Ensure discretionary access control permission modification events chmod,fchmod,fchmodat are collected | Live
+    exec: 'auditctl -l | grep -P -- ''chmod'''
+    exit-status: 0
+    stdout:
+    - '/-a always,exit -F arch=b64 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=(unset|4294967295|-1) -F key=perm_mod/'
+    - '/-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=(unset|4294967295|-1) -F key=perm_mod/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.18
+      NIST800-53R5:
+      - AU-3
+      - CM-6
+  {{ end }}
+{{ end }}

@@ -1,5 +1,29 @@
 # Changes to SUSE15-CIS-Audit
 
+## CIS Benchmark 3.0.0
+
+## November 2026 - Initial
+
+- benchmark_version v3.0.0
+- run_audit.sh BENCHMARK_VER 3.0.0
+- 104 tests renumbered to the v3.0.0 IDs
+- 36 retired tests removed
+- 75 tests added
+- goss.yml includes rebuilt for the v3.0.0 layout
+- 1.5.4-1.5.6 tolerate a missing sysctl.conf
+- 2.1.21 skipped when suse15cis_gui is true
+- 6.1.1.2 checks the journal-remote socket and service
+- vars/CIS.yml variables aligned with the role
+- README benchmark version v3.0.0
+- run_audit.sh uses syver v0.16.1 by default
+- README describes syver
+- goss.yml renamed syver.yml, gossfile renamed syverfile
+- run_audit.sh AUDIT_FILE syver.yml
+- discovery for partitions, cron, at, postfix and optional files
+- host-dependent and opted-out tests skipped with a reason
+- 2.1.22 mail server gate fixed, checks /etc/postfix/main.cf
+- 6.1.2.7 skipped on suse15cis_system_is_log_server
+
 ## CIS Benchmark 2.0.1
 
 ## November 2026 - QA fixes

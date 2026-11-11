@@ -1,24 +1,26 @@
 ---
 
 {{ if .Vars.suse15cis_gui }}
-    {{ if .Vars.suse15cis_level_1 }}
-      {{ if .Vars.suse15cis_rule_1_8_6 }}
-file:
-  00-media-automount_disable:
-    title: 1.8.6 | Ensure GDM automatic mounting of removable media is disabled
-    path: /etc/dconf/db/{{ .Vars.suse15cis_dconf_db_name }}.d/00-media-automount
-    exists: true
-    contents:
-    - '/^[org/gnome/desktop/media-handling]/'
-    - '/^automount=false/'
-    - '/^automount-open=false/'
-    - '!/^automount=true/'
-    - '!/^automount-open=true/'
+  {{ if .Vars.suse15cis_level_1 }}
+    {{ if .Vars.suse15cis_rule_1_8_6 }}
+command:
+  gdm_xdmcp_disabled:
+    title: 1.8.6 | Ensure XDMCP is not enabled
+    exec: |
+      for l_file in /etc/gdm/custom.conf /etc/gdm/daemon.conf; do
+        [ -f "$l_file" ] && awk '/^[[:space:]]*\[xdmcp\]/{f=1;next} /^[[:space:]]*\[/{f=0} f && /^[[:space:]]*Enable[[:space:]]*=[[:space:]]*true/{print "FAIL: " FILENAME ": " $0}' "$l_file"
+      done
+      echo scan_done
+    exit-status: 0
+    stdout:
+    - '/scan_done/'
+    - '!/^FAIL:/'
     meta:
       server: 1
-      workstation: 2
+      workstation: 1
       CIS_ID:
       - 1.8.6
-      {{ end }}
+      NIST800-53R5: NA
     {{ end }}
+  {{ end }}
 {{ end }}

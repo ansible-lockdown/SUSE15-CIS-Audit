@@ -33,6 +33,7 @@ command:
     - '/^scan_done$/'
     - '!/^FAIL:/'
     skip: {{ not .Vars.suse15cis_force_user_maxdays }}
+    skip-reason: suse15cis_force_user_maxdays is false, existing accounts are not changed by the role
     meta:
       server: 1
       workstation: 1

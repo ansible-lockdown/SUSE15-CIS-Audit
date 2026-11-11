@@ -2,11 +2,12 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_2_1_14 }}
-    {{ if not .Vars.suse15cis_rsync_server }}
-      {{ if not .Vars.suse15cis_rsync_mask }}
+    {{ if not .Vars.suse15cis_rsync_mask }}
 package:
   rsync_pkg:
     title: 2.1.14 | Ensure rsync services are not in use | pkg removed
+    skip: {{ .Vars.suse15cis_rsync_server }}
+    skip-reason: an rsync server is required, suse15cis_rsync_server is true
     name: rsync
     installed: false
     meta:
@@ -17,11 +18,13 @@ package:
       NIST800-53R5:
       - CM-6
       - CM-7
-      {{ end }}
-      {{ if .Vars.suse15cis_rsync_mask }}
+    {{ end }}
+    {{ if .Vars.suse15cis_rsync_mask }}
 file:
   rsync_service_masked:
     title: 2.1.14 | Ensure rsync services are not in use | masked
+    skip: {{ .Vars.suse15cis_rsync_server }}
+    skip-reason: an rsync server is required, suse15cis_rsync_server is true
     path: /etc/systemd/system/rsyncd.service
     exists: true
     filetype: symlink
@@ -36,6 +39,8 @@ file:
       - CM-7
     rsync_socket_masked:
     title: 2.1.14 | Ensure rsync services are not in use | masked
+    skip: {{ .Vars.suse15cis_rsync_server }}
+    skip-reason: an rsync server is required, suse15cis_rsync_server is true
     path: /etc/systemd/system/rsyncd.socket
     exists: true
     filetype: symlink
@@ -48,7 +53,6 @@ file:
       NIST800-53R5:
       - CM-6
       - CM-7
-      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

@@ -5,10 +5,24 @@
 command:
   root_path_check:
     title: 5.4.2.5 | Ensure root path integrity
-    exec: "/bin/bash --login -c 'env | grep ^PATH=' | sed -e 's/PATH=//' -e 's/::/:/' -e 's/:$//' -e 's/:/\\n/g'"
+    exec: |
+      l_root_path="$(su - root -c env 2>/dev/null | awk -F= '$1=="PATH" {print $2}')"
+      [ -z "$l_root_path" ] && echo "FAIL: root PATH not found"
+      echo "$l_root_path" | grep -q -- '::' && echo "FAIL: root PATH contains an empty directory (::)"
+      echo "$l_root_path" | grep -Pq -- ':\h*$' && echo "FAIL: root PATH contains a trailing (:)"
+      echo "$l_root_path" | grep -Pq -- '(^\h*|:)\.(:|\h*$)' && echo "FAIL: root PATH contains current working directory (.)"
+      echo "$l_root_path" | tr ':' '\n' | while IFS= read -r l_dir; do
+        [ -z "$l_dir" ] && continue
+        if [ -d "$l_dir" ]; then
+          find -L "$l_dir" -maxdepth 0 \( ! -user root -o -perm /022 \) -printf 'FAIL: %p is not owned by root or is group or other writable\n'
+        else
+          echo "FAIL: $l_dir is not a directory"
+        fi
+      done
+      true
     exit-status: 0
     stdout:
-    - '!/\\./'
+    - '!/^FAIL:/'
     meta:
       server: 1
       workstation: 1

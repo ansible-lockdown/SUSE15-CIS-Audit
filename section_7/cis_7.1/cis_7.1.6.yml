@@ -5,6 +5,8 @@
 file:
   shadow-_perms:
     title: 7.1.6 | Ensure access to /etc/shadow- is configured
+    skip: {{ not .Discovered.shadow_backup_exists }}
+    skip-reason: /etc/shadow- is a backup written by account-management tools and does not exist on this host
     path: /etc/shadow-
     exists: true
     owner: root

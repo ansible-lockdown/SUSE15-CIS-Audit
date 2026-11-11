@@ -3,26 +3,26 @@
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_1_1_1_2 }}
 command:
-  freevxfs:
-    title: 1.1.1.2 | Ensure freevxfs kernel module is not available | disabled
+  firewire_core:
+    title: 1.1.1.2 | Ensure firewire-core kernel module is not available | disabled
     exit-status: 0
-    exec: "modprobe -n -v freevxfs | grep -E '(freevxfs|install)'"
+    exec: "modprobe -n -v firewire-core | grep -E '(firewire-core|install)'"
     stdout:
     - '/install /bin/(false|true)/'
     meta:
       server: 1
-      workstation: 1
+      workstation: 2
       CIS_ID: 1.1.1.2
       NIST800-53R5: CM-7
-  blacklist_freevxfs:
-    title: 1.1.1.2 | Ensure freevxfs kernel module is not available | blacklist
+  blacklist_firewire_core:
+    title: 1.1.1.2 | Ensure firewire-core kernel module is not available | blacklist
     exit-status: 0
-    exec: grep freevxfs /etc/modprobe.d/*.conf
+    exec: grep firewire-core /etc/modprobe.d/*.conf
     stdout:
-      - '/blacklist freevxfs/'
+      - '/blacklist firewire-core/'
     meta:
       server: 1
-      workstation: 1
+      workstation: 2
       CIS_ID: 1.1.1.2
       NIST800-53R5: CM-7
   {{ end }}

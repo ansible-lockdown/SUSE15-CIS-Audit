@@ -5,6 +5,8 @@
 file:
   cron_hourly_perms:
     title: 2.4.1.3 | Ensure access to /etc/cron.hourly is configured
+    skip: {{ not .Discovered.cron_installed }}
+    skip-reason: cron is not installed, cron package absent
     path: /etc/cron.hourly
     exists: true
     owner: root

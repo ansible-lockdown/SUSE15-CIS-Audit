@@ -1,0 +1,20 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_3_3_1_2 }}
+kernel-param:
+  net_ipv4_conf_all_forwarding:
+    title: 3.3.1.2 | Ensure net.ipv4.conf.all.forwarding is configured
+    skip: {{ .Vars.suse15cis_is_router }}
+    skip-reason: this host is a router, suse15cis_is_router is true
+    name: net.ipv4.conf.all.forwarding
+    value: '0'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.3.1.2
+      NIST800-53R5:
+      - CM-6
+  {{ end }}
+{{ end }}

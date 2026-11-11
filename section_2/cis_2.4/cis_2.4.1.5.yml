@@ -5,6 +5,8 @@
 file:
   cron_weekly_perms:
     title: 2.4.1.5 | Ensure access to /etc/cron.weekly is configured
+    skip: {{ not .Discovered.cron_installed }}
+    skip-reason: cron is not installed, cron package absent
     path: /etc/cron.weekly
     exists: true
     owner: root

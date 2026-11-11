@@ -1,0 +1,21 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_4_1_7 }}
+    {{ if eq .Vars.suse15cis_firewall_package "firewalld" }}
+command:
+  cis_4_1_7:
+    title: 4.1.7 | Configure firewall to drop all traffic | Manual Check Required
+    exit-status: 0
+    exec: echo "Manual check - review 'firewall-cmd --get-default-zone' and set the drop zone as default per site policy"
+    stdout: []
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.1.7
+      NIST800-53R5:
+      - NA
+    {{ end }}
+  {{ end }}
+{{ end }}

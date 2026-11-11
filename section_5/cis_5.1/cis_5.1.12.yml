@@ -2,24 +2,22 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_5_1_12 }}
-file:
-  ssh_hostbased_auth:
-    title: 5.1.12 | Ensure sshd HostbasedAuthentication is disabled
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - '/^(?i)HostbasedAuthentication no/'
-    - '!/^(?i)HostbasedAuthentication yes/'
+command:
+  sshd_KEX:
+    title: 5.1.12 | Ensure sshd KexAlgorithms is configured
+    exec: sshd -T | grep -i '^kexalgorithms'
+    exit-status: 0
+    stdout:
+    - '/(?i)^kexalgorithms\s/'
+    {{ range .Vars.suse15cis_sshd_weak_kex }}
+    - '!/(?i)^kexalgorithms\s(.*,)?{{ . }}(,|$)/'
+    {{ end }}
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 5.1.12
       NIST800-53R5:
-      - CM-1
-      - CM-2
-      - CM-6
-      - CM-7
-      - IA-5
+      - SC-8
   {{ end }}
 {{ end }}

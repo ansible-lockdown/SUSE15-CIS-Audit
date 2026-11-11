@@ -1,0 +1,22 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_6_1_2_6 }}
+command:
+  remote_syslog:
+    title: 6.1.2.6 | Ensure rsyslog is configured to send logs to a remote log host
+    skip: {{ not .Vars.suse15cis_remote_log_server }}
+    skip-reason: remote log forwarding is not configured (suse15cis_remote_log_server is false)
+    exec: grep -Phsi -- '^\s*([^#]+\s+)?action\(([^#]+\s+)?\btarget="?[^#"]+"?\b' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
+    exit-status: 0
+    stdout:
+    - '/target="?{{ .Vars.suse15cis_remote_log_host }}"?/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.1.2.6
+      NIST800-53R5:
+      - AU-6
+  {{ end }}
+{{ end }}

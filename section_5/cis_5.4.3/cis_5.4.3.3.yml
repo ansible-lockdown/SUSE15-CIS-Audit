@@ -4,12 +4,28 @@
   {{ if .Vars.suse15cis_rule_5_4_3_3 }}
 command:
   umask_profile_scripts:
-    title: 5.4.3.3 | Ensure default user umask is configured
-    exec: 'grep -i "^\s*umask" /etc/profile /etc/profile.d/*.sh /etc/login.defs /etc/default/login /etc/pam.d/postlogin 2>&1 | grep -i umask | cut -d ":" -f1,2'
+    title: 5.4.3.3 | Ensure default user umask is configured | profile.d
+    exec: "grep -Pshi -- '^\\h*umask\\b' /etc/profile.d/*.sh"
     exit-status: 0
     stdout:
-    - '/.*(?i)umask\s+0[2-7][7]/'
-    - '!/.*(?i)umask\s+[7][0-1][0-6]/'
+    - '/(?i)^\s*umask\s+(0?[0-7][2-7]7|u=[rwx]{0,3},g=[rx]{0,2},o=)(\s|$)/'
+    - '!/(?i)^\s*umask\s+0?(0[01][0-7]|0[0-7][0-6]|[1-7][0-7][0-7])(\s|$)/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.4.3.3
+      NIST800-53R5:
+      - AC-3
+      - MP-2
+file:
+  umask_login_defs:
+    title: 5.4.3.3 | Ensure default user umask is configured | login.defs
+    path: /etc/login.defs
+    exists: true
+    contents:
+    - '/^\s*UMASK\s+0?[0-7][2-7]7(\s|$)/'
+    - '!/^\s*UMASK\s+0?(0[01][0-7]|0[0-7][0-6]|[1-7][0-7][0-7])(\s|$)/'
     meta:
       server: 1
       workstation: 1

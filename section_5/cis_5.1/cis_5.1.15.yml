@@ -2,22 +2,20 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_5_1_15 }}
-file:
-  ssh_loglevel:
-    title: 5.1.15 | Ensure sshd LogLevel is configured
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - '/LogLevel (VERBOSE|INFO)/'
-    - '!/^LogLevel DEBUG/'
+command:
+  sshd_MACS:
+    title: 5.1.15 | Ensure sshd MACs are configured
+    exec: "sshd -T 2>/dev/null | grep -Ei '^macs[[:space:]]'"
+    exit-status: 0
+    stdout:
+    - '/(?i)^macs\s+\S+/'
+    - '!/(?i)^macs\s+"?(\S+,)?(hmac-md5|hmac-md5-96|hmac-ripemd160|hmac-sha1-96|umac-64@openssh\.com|hmac-md5-etm@openssh\.com|hmac-md5-96-etm@openssh\.com|hmac-ripemd160-etm@openssh\.com|hmac-sha1-96-etm@openssh\.com|umac-64-etm@openssh\.com|umac-128-etm@openssh\.com)(,|"|$)/'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 5.1.15
       NIST800-53R5:
-      - AU-3
-      - AU-12
-      - SI-5
- {{ end }}
+      - SC-6
+  {{ end }}
 {{ end }}

@@ -5,9 +5,14 @@
     {{ if .Vars.suse15cis_rule_1_2_1_2 }}
 command:
   gpg_check_global:
-    title: 1.2.1.2 | Ensure gpgcheck is globally activated
-    exit-status: 0
-    exec: "if [ `grep -c -E '^\\s*gpgcheck.*0' /etc/zypp/zypp.conf` -ge 1 ]; then echo FAIL; elif [ `grep -c -E '^\\s*gpgcheck.*1' /etc/zypp/zypp.conf` -ge 1 ]; then echo Passed_Check;fi"
+    title: 1.2.1.2 | Ensure gpgcheck is configured | zypp.conf
+    exec: grep -Pi -- '^\h*gpgcheck\h*=\h*(0|false|no|off)\b' /etc/zypp/zypp.conf
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - '!/./'
     timeout: {{ .Vars.timeout_ms }}
     meta:
       server: 1
@@ -16,9 +21,14 @@ command:
       - 1.2.1.2
       NIST800-53R5: SI-2
   gpg_check_repo:
-    title: 1.2.1.2 | Ensure gpgcheck is globally activated
-    exit-status: 0
-    exec: "if [ `grep -c -E '^\\s*gpgcheck.*0' /etc/zypp/repos.d/*.repo` -ge 1 ]; then echo FAIL; elif [ `grep -c -E '^\\s*gpgcheck.*1' /etc/zypp/repos.d/*.repo` -ge 1 ]; then echo Passed_Check;fi"
+    title: 1.2.1.2 | Ensure gpgcheck is configured | repos.d
+    exec: grep -Pris -- '^\h*gpgcheck\h*=\h*(0|[2-9]|[1-9][0-9]+|false|no|off)\b' /etc/zypp/repos.d/
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - '!/./'
     timeout: {{ .Vars.timeout_ms }}
     meta:
       server: 1
@@ -26,6 +36,6 @@ command:
       CIS_ID:
       - 1.2.1.2
       NIST800-53R5: SI-2
-      {{ end }}
+    {{ end }}
   {{ end }}
 {{ end }}

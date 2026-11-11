@@ -1,0 +1,41 @@
+---
+
+{{ if .Vars.suse15cis_level_2 }}
+  {{ if not .Vars.suse15cis_apparmor_disable }}
+    {{ if .Vars.suse15cis_rule_6_2_3_26 }}
+command:
+  auditd_MAC_cnf:
+    title: 6.2.3.26 | Ensure events that modify the system's Mandatory Access Controls are collected | Config
+    exec: 'grep -Phs -- ''apparmor'' /etc/audit/rules.d/*.rules'
+    exit-status: 0
+    stdout:
+    - '/^\s*(-w /etc/apparmor/? -p wa -k MAC-policy|-a (always,exit|exit,always)( -F arch=b(32|64))? -S all -F (path|dir)=/etc/apparmor/? -F perm=wa (-k |-F key=)MAC-policy)\s*$/'
+    - '/^\s*(-w /usr/share/apparmor/? -p wa -k MAC-policy|-a (always,exit|exit,always)( -F arch=b(32|64))? -S all -F (path|dir)=/usr/share/apparmor/? -F perm=wa (-k |-F key=)MAC-policy)\s*$/'
+    - '/^\s*(-w /var/lib/apparmor/? -p wa -k MAC-policy|-a (always,exit|exit,always)( -F arch=b(32|64))? -S all -F (path|dir)=/var/lib/apparmor/? -F perm=wa (-k |-F key=)MAC-policy)\s*$/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.26
+      NIST800-53R5:
+      - AU-3
+      - CM-6
+  auditd_MAC_live:
+    title: 6.2.3.26 | Ensure events that modify the system's Mandatory Access Controls are collected | Live
+    exec: 'auditctl -l | grep -P -- ''apparmor'''
+    exit-status: 0
+    stdout:
+    - '/^\s*(-w /etc/apparmor/? -p wa -k MAC-policy|-a (always,exit|exit,always)( -F arch=b(32|64))? -S all -F (path|dir)=/etc/apparmor/? -F perm=wa (-k |-F key=)MAC-policy)\s*$/'
+    - '/^\s*(-w /usr/share/apparmor/? -p wa -k MAC-policy|-a (always,exit|exit,always)( -F arch=b(32|64))? -S all -F (path|dir)=/usr/share/apparmor/? -F perm=wa (-k |-F key=)MAC-policy)\s*$/'
+    - '/^\s*(-w /var/lib/apparmor/? -p wa -k MAC-policy|-a (always,exit|exit,always)( -F arch=b(32|64))? -S all -F (path|dir)=/var/lib/apparmor/? -F perm=wa (-k |-F key=)MAC-policy)\s*$/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.26
+      NIST800-53R5:
+      - AU-3
+      - CM-6
+    {{ end }}
+  {{ end }}
+{{ end }}

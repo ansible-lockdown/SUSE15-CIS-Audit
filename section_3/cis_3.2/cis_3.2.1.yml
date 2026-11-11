@@ -1,31 +1,45 @@
 ---
 
-{{ if .Vars.suse15cis_level_2 }}
+{{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_3_2_1 }}
 command:
-  modprobe_dccp:
-    title: 3.2.1 | Ensure dccp kernel module is not available | DCCP config
+  modprobe_atm:
+    title: 3.2.1 | Ensure atm kernel module is not available | atm config
     exit-status: 0
-    exec: 'modprobe -n -v dccp'
+    exec: 'modprobe -n -v atm'
     stdout:
       - '/install \/bin\/(true|false)/'
     meta:
-      server: 2
-      workstation: 2
+      server: 1
+      workstation: 1
       CIS_ID:
       - 3.2.1
       NIST800-53R5:
       - CM-7
       - SI-4
-  lsmod_dccp:
-    title: 3.2.1 | Ensure dccp kernel module is not available | running dccp
+  lsmod_atm:
+    title: 3.2.1 | Ensure atm kernel module is not available | running atm
     exit-status: 1
-    exec: lsmod | grep -i dccp
+    exec: lsmod | grep -Ew '^atm'
     stdout:
     - '!/^.*/'
     meta:
-      server: 2
-      workstation: 2
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.2.1
+      NIST800-53R5:
+      - CM-7
+      - SI-4
+  blacklist_atm:
+    title: 3.2.1 | Ensure atm kernel module is not available | atm deny listed
+    exit-status: 0
+    exec: "modprobe --showconfig | grep -P -- '^blacklist\\h+atm$'"
+    stdout:
+    - '/^blacklist\s+atm$/'
+    meta:
+      server: 1
+      workstation: 1
       CIS_ID:
       - 3.2.1
       NIST800-53R5:

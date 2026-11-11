@@ -1,0 +1,48 @@
+---
+
+{{ if .Vars.suse15cis_level_2 }}
+  {{ if .Vars.suse15cis_rule_6_2_3_8 }}
+command:
+  auditd_network_cnf:
+    title: 6.2.3.8 | Ensure events that modify /etc/sysconfig/network and /etc/NetworkManager/system-connections/ are collected | Config
+    exec: |
+      for T in /etc/sysconfig/network /etc/NetworkManager/system-connections; do
+        [ -e "$T" ] || continue
+        grep -Phsq -- "^\h*(-w\h+${T}/?\h+-p\h+wa\h+-k\h+system-locale|-a\h+(always,exit|exit,always)(\h+-F\h+arch=b(32|64))?\h+-S\h+all\h+-F\h+(path|dir)=${T}/?\h+-F\h+perm=wa\h+(-k\h+|-F\h+key=)system-locale)\h*$" /etc/audit/rules.d/*.rules || echo "FAIL: no on-disk rule for $T"
+      done
+      echo check_complete
+    exit-status: 0
+    stdout:
+    - '/^check_complete$/'
+    - '!/^FAIL:/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.8
+      NIST800-53R5:
+      - AU-3
+      - CM-6
+  auditd_network_live:
+    title: 6.2.3.8 | Ensure events that modify /etc/sysconfig/network and /etc/NetworkManager/system-connections/ are collected | Live
+    exec: |
+      RUNNING="$(auditctl -l)"
+      for T in /etc/sysconfig/network /etc/NetworkManager/system-connections; do
+        [ -e "$T" ] || continue
+        printf '%s\n' "$RUNNING" | grep -Pq -- "^\h*(-w\h+${T}/?\h+-p\h+wa\h+-k\h+system-locale|-a\h+(always,exit|exit,always)(\h+-F\h+arch=b(32|64))?\h+-S\h+all\h+-F\h+(path|dir)=${T}/?\h+-F\h+perm=wa\h+(-k\h+|-F\h+key=)system-locale)\h*$" || echo "FAIL: no loaded rule for $T"
+      done
+      echo check_complete
+    exit-status: 0
+    stdout:
+    - '/^check_complete$/'
+    - '!/^FAIL:/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.8
+      NIST800-53R5:
+      - AU-3
+      - CM-6
+  {{ end }}
+{{ end }}

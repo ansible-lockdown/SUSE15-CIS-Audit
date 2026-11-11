@@ -3,10 +3,10 @@
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_1_1_1_4 }}
 command:
-  hfsplus_modprobe:
-    title: 1.1.1.4 | Ensure hfsplus kernel module is not available | disabled
+  hfs_modprobe:
+    title: 1.1.1.4 | Ensure hfs kernel module is not available | disabled
     exit-status: 0
-    exec: "modprobe -n -v hfsplus | grep -E '(hfsplus|install)'"
+    exec: "modprobe -n -v hfs | grep -E '(hfs|install)'"
     stdout:
     - '/install /bin/(false|true)/'
     meta:
@@ -14,12 +14,12 @@ command:
       workstation: 1
       CIS_ID: 1.1.1.4
       NIST800-53R5: CM-7
-  blacklist_hfsplus:
-    title: 1.1.1.4 | Ensure hfsplus kernel module is not available | blacklist
+  blacklist_hfs:
+    title: 1.1.1.4 | Ensure hfs kernel module is not available | blacklist
     exit-status: 0
-    exec: grep hfsplus /etc/modprobe.d/*.conf
+    exec: grep hfs /etc/modprobe.d/*.conf
     stdout:
-      - '/blacklist hfsplus/'
+      - '/blacklist hfs/'
     meta:
       server: 1
       workstation: 1

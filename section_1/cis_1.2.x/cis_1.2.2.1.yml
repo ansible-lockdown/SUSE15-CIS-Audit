@@ -1,11 +1,12 @@
 ---
 
 {{ if .Vars.suse15cis_level_1 }}
-  {{ if .Vars.run_heavy_tests }}
-    {{ if .Vars.suse15cis_rule_1_2_2_1 }}
+  {{ if .Vars.suse15cis_rule_1_2_2_1 }}
 command:
   package-updates:
     title: 1.2.2.1 | Ensure updates, patches, and additional security software are installed | packages
+    skip: {{ not .Vars.run_heavy_tests }}
+    skip-reason: heavy tests are off, run_heavy_tests is false
     exit-status: 0
     timeout: {{ .Vars.timeout_ms }}
     exec: zypper lu
@@ -17,6 +18,5 @@ command:
       CIS_ID:
       - 1.2.2.1
       NIST800-53R5: SI-2
-    {{ end }}
   {{ end }}
 {{ end }}

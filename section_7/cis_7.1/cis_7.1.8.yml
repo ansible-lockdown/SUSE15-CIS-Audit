@@ -5,6 +5,8 @@
 file:
   gshadow-_perms:
     title: 7.1.8 | Ensure access to /etc/gshadow- is configured
+    skip: {{ not .Discovered.gshadow_backup_exists }}
+    skip-reason: /etc/gshadow- is a backup written by account-management tools and does not exist on this host
     path: /etc/gshadow-
     exists:
       or:

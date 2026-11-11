@@ -1,0 +1,20 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_4_1_8 }}
+    {{ if eq .Vars.suse15cis_firewall_package "firewalld" }}
+service:
+  firewalld:
+    title: 4.1.8 | Ensure firewalld.service is configured
+    enabled: true
+    running: true
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.1.8
+      NIST800-53R5:
+      - NA
+    {{ end }}
+  {{ end }}
+{{ end }}

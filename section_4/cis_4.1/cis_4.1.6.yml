@@ -1,0 +1,21 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_4_1_6 }}
+    {{ if eq .Vars.suse15cis_firewall_package "firewalld" }}
+command:
+  cis_4_1_6:
+    title: 4.1.6 | Ensure firewalld services and ports are configured
+    exit-status: 0
+    exec: echo "Manual check - review 'firewall-cmd --list-all' and confirm only approved services and ports are open"
+    stdout: []
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.1.6
+      NIST800-53R5:
+      - NA
+    {{ end }}
+  {{ end }}
+{{ end }}

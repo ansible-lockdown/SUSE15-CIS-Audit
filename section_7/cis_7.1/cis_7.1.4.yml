@@ -5,6 +5,8 @@
 file:
   group-_perms:
     title: 7.1.4 | Ensure access to /etc/group- is configured
+    skip: {{ not .Discovered.group_backup_exists }}
+    skip-reason: /etc/group- is a backup written by account-management tools and does not exist on this host
     path: /etc/group-
     exists: true
     owner: root

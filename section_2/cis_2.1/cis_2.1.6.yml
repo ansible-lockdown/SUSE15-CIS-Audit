@@ -2,11 +2,12 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_2_1_6 }}
-    {{ if not .Vars.suse15cis_samba_server }}
-      {{ if not .Vars.suse15cis_samba_mask }}
+    {{ if not .Vars.suse15cis_samba_mask }}
 package:
   samba_pkg:
     title: 2.1.6 | Ensure samba file server services are not in use | pkg removed
+    skip: {{ .Vars.suse15cis_samba_server }}
+    skip-reason: a samba server is required, suse15cis_samba_server is true
     name: samba
     installed: false
     meta:
@@ -17,11 +18,13 @@ package:
       NIST800-53R5:
       - CM-6
       - CM-7
-      {{ end }}
-      {{ if .Vars.suse15cis_samba_mask }}
+    {{ end }}
+    {{ if .Vars.suse15cis_samba_mask }}
 file:
   samba_service_masked:
     title: 2.1.6 | Ensure samba file server services are not in use | masked
+    skip: {{ .Vars.suse15cis_samba_server }}
+    skip-reason: a samba server is required, suse15cis_samba_server is true
     path: /etc/systemd/system/smb.service
     exists: true
     filetype: symlink
@@ -34,7 +37,6 @@ file:
       NIST800-53R5:
       - CM-6
       - CM-7
-      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

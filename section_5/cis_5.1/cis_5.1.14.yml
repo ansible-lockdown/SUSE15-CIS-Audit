@@ -2,19 +2,21 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_5_1_14 }}
-file:
-  ssh_logingrace:
-    title: 5.1.14 | Ensure sshd LoginGraceTime is configured
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - '/^(?i)LoginGraceTime ([1-9]|[1-5][0-9]|60)$/'
+command:
+  sshd_loglevel:
+    title: 5.1.14 | Ensure sshd LogLevel is configured
+    exec: "sshd -T 2>/dev/null | grep -Ei '^loglevel[[:space:]]'"
+    exit-status: 0
+    stdout:
+    - '/(?i)^loglevel\s+(verbose|info)$/'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 5.1.14
       NIST800-53R5:
-      - CM-6
+      - AU-3
+      - AU-12
+      - SI-5
   {{ end }}
 {{ end }}

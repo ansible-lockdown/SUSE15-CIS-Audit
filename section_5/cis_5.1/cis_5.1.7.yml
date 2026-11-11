@@ -2,33 +2,24 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_5_1_7 }}
-file:
-  sshd_access_limited:
-    title: 5.1.7 | Ensure sshd access is configured
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    {{ if .Vars.suse15cis_sshd_allow_users }}
-    - AllowUsers {{ .Vars.suse15cis_sshd_allow_users }}
-    {{ end }}
-    {{ if .Vars.suse15cis_sshd_allow_groups }}
-    - AllowGroups {{ .Vars.suse15cis_sshd_allow_groups }}
-    {{ end }}
-    {{ if .Vars.suse15cis_sshd_deny_users }}
-    - DenyUsers {{ .Vars.suse15cis_sshd_deny_users }}
-    {{ end }}
-    {{ if .Vars.suse15cis_sshd_deny_groups }}
-    - DenyGroups {{ .Vars.suse15cis_sshd_deny_groups }}
-    {{ end }}
-    - '/^(?i)(Allow|Deny)(Users|Groups)\s+\S+/'
-    skip: {{ if or .Vars.suse15cis_sshd_allow_users .Vars.suse15cis_sshd_allow_groups .Vars.suse15cis_sshd_deny_users .Vars.suse15cis_sshd_deny_groups }}false{{ else }}true{{ end }}
+command:
+  sshd_clientalive:
+    title: 5.1.7 | Ensure sshd ClientAliveInterval and ClientAliveCountMax are configured
+    exec: "sshd -T 2>/dev/null | grep -Ei '^clientalive(interval|countmax)[[:space:]]'"
+    exit-status: 0
+    stdout:
+    - '/(?i)^clientaliveinterval\s+[1-9][0-9]*$/'
+    - '/(?i)^clientalivecountmax\s+[1-9][0-9]*$/'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 5.1.7
       NIST800-53R5:
-      - AC-3
-      - MP-2
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
   {{ end }}
 {{ end }}

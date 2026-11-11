@@ -3,9 +3,11 @@
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_2_4_1_7 }}
 file:
-  cron_d_perms:
-    title: 2.4.1.7 | Ensure access to /etc/cron.d is configured
-    path: /etc/cron.d
+  cron_yearly_perms:
+    title: 2.4.1.7 | Ensure access to /etc/cron.yearly is configured
+    skip: {{ or (not .Discovered.cron_installed) (not .Discovered.cron_yearly_present) }}
+    skip-reason: cron is not installed or /etc/cron.yearly does not exist, both are a passing state
+    path: /etc/cron.yearly
     exists: true
     owner: root
     group: root

@@ -1,0 +1,27 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_5_1_23 }}
+command:
+  ssh_pq_kex:
+    title: 5.1.23 | Ensure sshd post-quantum cryptography key exchange algorithms are configured
+    exec: |
+      l_ver="$(sshd -V 2>&1 | grep -Eio 'openssh_[0-9]+\.[0-9]+' | cut -d_ -f2)"
+      l_kex="$(sshd -T 2>/dev/null | awk 'tolower($1)=="kexalgorithms" {print $2}')"
+      echo "$l_kex" | grep -q 'sntrup761x25519-sha512' && echo "OK: sntrup761x25519-sha512" || echo "FAIL: sntrup761x25519-sha512 not in kexalgorithms"
+      if [ -n "$l_ver" ] && [ "$(printf '%s\n' 9.9 "$l_ver" | sort -V | head -n1)" = "9.9" ]; then
+        echo "$l_kex" | grep -q 'mlkem768x25519-sha256' && echo "OK: mlkem768x25519-sha256" || echo "FAIL: mlkem768x25519-sha256 not in kexalgorithms"
+      fi
+    exit-status: 0
+    stdout:
+    - '/^OK: sntrup761x25519-sha512/'
+    - '!/^FAIL:/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.1.23
+      NIST800-53R5:
+      - SC-8
+  {{ end }}
+{{ end }}

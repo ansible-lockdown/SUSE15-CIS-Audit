@@ -1,0 +1,22 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_4_1_4 }}
+    {{ if eq .Vars.suse15cis_firewall_package "firewalld" }}
+command:
+  cis_4_1_4_lo_zone:
+    title: 4.1.4 | Ensure firewalld loopback traffic is configured | lo in trusted zone
+    exit-status: 0
+    exec: "firewall-cmd --get-zone-of-interface=lo"
+    stdout:
+      - '{{ .Vars.suse15cis_loopback_zone }}'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.1.4
+      NIST800-53R5:
+      - NA
+    {{ end }}
+  {{ end }}
+{{ end }}

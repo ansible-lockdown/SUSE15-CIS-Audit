@@ -1,0 +1,36 @@
+---
+
+{{ if .Vars.suse15cis_level_1 }}
+  {{ if .Vars.suse15cis_rule_6_1_1_6 }}
+command:
+  log_rotate_journald_conf:
+    title: 6.1.1.6 | Ensure journald log file rotation is configured
+    exec: grep -Ei "max|keep" /etc/systemd/journald.conf /etc/systemd/journald.conf.d/*.conf
+    exit-status:
+      or:
+      - 0
+      - 1
+      - 2
+    stdout:
+    - '/.*\:SystemMaxUse\s*=\s*{{ .Vars.suse15cis_journald_systemmaxuse }}/'
+    - '/.*\:SystemKeepFree\s*=\s*{{ .Vars.suse15cis_journald_systemkeepfree }}/'
+    - '/.*\:RuntimeMaxUse\s*=\s*{{ .Vars.suse15cis_journald_runtimemaxuse }}/'
+    - '/.*\:RuntimeKeepFree\s*=\s*{{ .Vars.suse15cis_journald_runtimekeepfree }}/'
+    - '/.*\:MaxFileSec\s*=\s*{{ .Vars.suse15cis_journald_maxfilesec }}/'
+    # Controls can be overridden if var set later in the config - check for incorrect settings below
+    - '!/.*\:SystemMaxUse\s*=\s*(?:[^{{ .Vars.suse15cis_journald_systemmaxuse }}])/'
+    - '!/.*\:SystemKeepFree\s*=\s*(?:[^{{ .Vars.suse15cis_journald_systemkeepfree }}])/'
+    - '!/.*\:RuntimeMaxUse\s*=\s*(?:[^{{ .Vars.suse15cis_journald_runtimemaxuse }}])/'
+    - '!/.*\:RuntimeKeepFree\s*=\s*(?:[^{{ .Vars.suse15cis_journald_runtimekeepfree }}])/'
+    - '!/.*\:MaxFileSec\s*=\s*(?:[^{{ .Vars.suse15cis_journald_maxfilesec }}])/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.1.1.6
+      NIST800-53R5:
+      - AU-2
+      - AU-7
+      - AU-12
+  {{ end }}
+{{ end }}

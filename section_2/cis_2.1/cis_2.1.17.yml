@@ -2,11 +2,12 @@
 
 {{ if .Vars.suse15cis_level_1 }}
   {{ if .Vars.suse15cis_rule_2_1_17 }}
-    {{ if not .Vars.suse15cis_tftp_server }}
-      {{ if not .Vars.suse15cis_tftp_mask }}
+    {{ if not .Vars.suse15cis_tftp_mask }}
 package:
   tftp_pkg:
     title: 2.1.17 | Ensure tftp server services are not in use | pkg removed
+    skip: {{ .Vars.suse15cis_tftp_server }}
+    skip-reason: a TFTP server is required, suse15cis_tftp_server is true
     name: tftp-server
     installed: false
     meta:
@@ -16,11 +17,13 @@ package:
       - 2.1.17
       NIST800-53R5:
       - CM-7
-      {{ end }}
-      {{ if .Vars.suse15cis_tftp_mask }}
+    {{ end }}
+    {{ if .Vars.suse15cis_tftp_mask }}
 file:
   tftp_service_masked:
     title: 2.1.17 | Ensure tftp server services are not in use | masked
+    skip: {{ .Vars.suse15cis_tftp_server }}
+    skip-reason: a TFTP server is required, suse15cis_tftp_server is true
     path: /etc/systemd/system/tftp.service
     exists: true
     filetype: symlink
@@ -34,6 +37,8 @@ file:
       - CM-7
   tftp_socket_masked:
     title: 2.1.17 | Ensure tftp server services are not in use | masked
+    skip: {{ .Vars.suse15cis_tftp_server }}
+    skip-reason: a TFTP server is required, suse15cis_tftp_server is true
     path: /etc/systemd/system/tftp.socket
     exists: true
     filetype: symlink
@@ -45,7 +50,6 @@ file:
       - 2.1.17
       NIST800-53R5:
       - CM-7
-      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

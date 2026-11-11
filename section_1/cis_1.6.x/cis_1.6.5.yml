@@ -4,11 +4,11 @@
   {{ if .Vars.suse15cis_rule_1_6_5 }}
 file:
   crypto_policies_no_weakmacs:
-    title: 1.6.5 | Ensure system wide crypto policy disables macs less than 128 bits
+    title: 1.6.5 | Ensure system wide crypto policy macs are configured
     path: /etc/crypto-policies/state/CURRENT.pol
     exists: true
     contents:
-    - '!/^mac\s*=\s*.*64/'
+    - '!/(?i)(^\s*mac\s*=\s*([^#\n\r]+)?-128|hmac-sha1)/'
     meta:
       server: 1
       workstation: 1

@@ -1,11 +1,12 @@
 ---
 
 {{ if .Vars.suse15cis_level_1 }}
-  {{ if .Vars.suse15cis_is_mail_server }}
-    {{ if .Vars.suse15cis_rule_2_1_22 }}
+  {{ if .Vars.suse15cis_rule_2_1_22 }}
 command:
   mta_listening_port25:
     title: 2.1.22 | Ensure mail transfer agents are configured for local-only mode
+    skip: {{ .Vars.suse15cis_is_mail_server }}
+    skip-reason: host is a mail server, suse15cis_is_mail_server is true
     exit-status: 1
     exec: 'ss -lntu | grep -E ":25\s" | grep -E -v "\s(127.0.0.1|\[?::1\]?):25\s"'
     stdout: ['!/./']
@@ -17,8 +18,10 @@ command:
       NIST800-53R5:
       - CM-7
 file:
-  /etc/postfix/main.conf:
+  /etc/postfix/main.cf:
     title: 2.1.22 | Ensure mail transfer agents are configured for local-only mode
+    skip: {{ or .Vars.suse15cis_is_mail_server (not .Discovered.postfix_installed) }}
+    skip-reason: host is a mail server or postfix is not installed
     exists: true
     contents:
     - '/^inet_interfaces\s*=\s*loopback-only/'
@@ -31,6 +34,5 @@ file:
       - 2.1.22
       NIST800-53R5:
       - CM-7
-    {{ end }}
   {{ end }}
 {{ end }}
