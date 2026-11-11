@@ -7,7 +7,7 @@ command:
   cis_4_1_3:
     title: 4.1.3 | Ensure firewalld active zone target is configured
     exit-status: 0
-    exec: "for z in $(firewall-cmd --get-active-zones 2>/dev/null | awk '!/^ /{print $1}'); do i=$(firewall-cmd --zone=$z --list-interfaces); echo \"$i\" | grep -Eqx '(lo|virbr[^ ]+)?' && continue; t=$(firewall-cmd --permanent --zone=$z --get-target); case $t in ACCEPT|'') echo \"$z target=$t interfaces=$i\";; esac; done"
+    exec: "zones=$(firewall-cmd --get-active-zones 2>/dev/null | awk '!/^ /{print $1}'); [ -z \"$zones\" ] && echo 'no active zone'; for z in $zones; do i=$(firewall-cmd --zone=$z --list-interfaces); echo \"$i\" | grep -Eqx '(lo|virbr[^ ]+)?' && continue; t=$(firewall-cmd --permanent --zone=$z --get-target); case $t in ACCEPT|'') echo \"$z target=$t interfaces=$i\";; esac; done"
     stdout: ['!/./']
     meta:
       server: 2

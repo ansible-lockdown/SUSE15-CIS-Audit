@@ -34,6 +34,10 @@ discovery:
   # 2.4.1.7 /etc/cron.yearly may not exist
   # 7.1.x backup and opasswd files the benchmark says may not exist
   file:
+    # 3.1.1 the sysctl disable file is only written when the kernel provides IPv6 (not booted with ipv6.disable=1)
+    /proc/sys/net/ipv6:
+      register: ipv6_kernel_present
+      exists: true
     /etc/cron.yearly:
       register: cron_yearly_present
       exists: true

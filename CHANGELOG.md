@@ -23,6 +23,12 @@
 - host-dependent and opted-out tests skipped with a reason
 - 2.1.22 mail server gate fixed, checks /etc/postfix/main.cf
 - 6.1.2.7 skipped on suse15cis_system_is_log_server
+- 3.1.1 skipped when the kernel has no IPv6
+- 2.4.1.9 cron.allow 0640 or more restrictive
+- 4.1.3 fails when no zone is active
+- 6.2.4.2 checks every file in the audit log directory
+- 6.1.2.5 skipped on suse15cis_rsyslog_ansiblemanaged
+- 6.2.3.26 no longer gated on suse15cis_apparmor_disable
 
 ## CIS Benchmark 2.0.1
 

@@ -829,6 +829,9 @@ suse15cis_journald_maxfilesec: 1month
 ## Control 6.1.2.7 - Ensure rsyslog is not configured to receive logs from a remote client
 # Whether the system is a log server; when true it may receive logs from remote clients and 6.1.2.7 is skipped
 suse15cis_system_is_log_server: false
+## Control 6.1.2.5 - Ensure rsyslog logging is configured
+# Whether the role manages the mail, news and misc logging rules in /etc/rsyslog.conf; when false 6.1.2.5 is skipped
+suse15cis_rsyslog_ansiblemanaged: true
 suse15cis_remote_log_server: false
 ## Control 6.1.2.5 - Ensure rsyslog is configured to send logs to a remote log host
 # This variable configures the value of the 'target' parameter to be configured when enabling
