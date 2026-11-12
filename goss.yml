@@ -43,10 +43,8 @@ gossfile:
   {{ end }}
   {{ if .Vars.suse15cis_section6 }}
   section_6/cis_6.1/*.yml: {}
-  {{ if eq .Vars.suse15cis_syslog "journald" }}
   section_6/cis_6.2.1/*.yml: {}
   section_6/cis_6.2.2/*.yml: {}
-  {{ end }}
   {{ if eq .Vars.suse15cis_syslog "rsyslog" }}
   section_6/cis_6.2.3/*.yml: {}
   {{ end }}
