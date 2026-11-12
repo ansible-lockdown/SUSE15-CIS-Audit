@@ -4,12 +4,25 @@
   {{ if .Vars.suse15cis_rule_3_1_2 }}
 command:
   wireless_disabled:
-    title: 3.1.2 | Ensure wireless interfaces are not available | MANUAL
+    title: 3.1.2 | Ensure wireless interfaces are not available
+    exec: |
+      find /sys/class/net/*/ -type d -name wireless 2>/dev/null | while read -r l_dir; do
+        l_iface="$(dirname "$l_dir")"
+        if [ -e "$l_iface/device/driver/module" ]; then
+          basename "$(readlink -f "$l_iface/device/driver/module")"
+        else
+          echo "builtin:$(basename "$l_iface")"
+        fi
+      done | sort -u | while read -r l_mname; do
+        case "$l_mname" in
+          builtin:*) echo "${l_mname#builtin:} driver is built into the kernel"; continue ;;
+        esac
+        modprobe -n -v "$l_mname" 2>/dev/null | grep -Pq '^\h*install\h+/(usr/)?bin/(true|false)\b' || echo "$l_mname is loadable"
+        lsmod | awk '{print $1}' | grep -qx "$l_mname" && echo "$l_mname is loaded"
+        modprobe --showconfig 2>/dev/null | grep -Pq "^\h*blacklist\h+$l_mname\b" || echo "$l_mname is not deny listed"
+      done
     exit-status: 0
-    exec: "if [ $(find /sys/class/net/*/ -type d -name wireless) ]; then echo MANUAL; else echo OK; fi"
-    stdout:
-    - '/^OK/'
-    - '!/^MANUAL/'
+    stdout: ['!/./']
     meta:
       server: 1
       workstation: NA

@@ -5,11 +5,23 @@
   {{ if .Vars.suse15cis_rule_1_3_1_3 }}
 command:
   apparmor_enf_or_comp:
-    title: 1.3.1.3 | Ensure all AppArmor Profiles are not disabled | profile
-    exec: LOADED=`apparmor_status | grep 'profiles are loaded' | awk '{print $1}'` && ENFORCE=`apparmor_status | grep 'profiles are in enforce mode.' | awk '{print $1}'` && COMPLAIN=`apparmor_status | grep 'profiles are in complain mode.' | awk '{print $1}'` && if [ $((LOADED + COMPLAIN)) != "$ENFORCE" ]; then echo "Profiles Error";fi
+    title: 1.3.1.3 | Ensure all AppArmor Profiles are not disabled
+    exec: |
+      apparmor_status 2>/dev/null | awk '
+        /profiles are loaded/ {pl=$1}
+        /profiles are in enforce mode/ {pe=$1}
+        /profiles are in complain mode/ {pc=$1}
+        /processes are unconfined but have a profile defined/ {qu=$1}
+        END {
+          print "profiles_loaded=" pl+0
+          print "profiles_enforce_or_complain=" (pl+0 == pe+pc ? "all" : pe+pc)
+          print "processes_unconfined=" (qu == "" ? "missing" : qu)
+        }'
     exit-status: 0
     stdout:
-    - '!/Profiles Error/'
+    - '/^profiles_loaded=[1-9]/'
+    - '/^profiles_enforce_or_complain=all$/'
+    - '/^processes_unconfined=0$/'
     meta:
       server: 1
       workstation: 1

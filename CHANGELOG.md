@@ -28,6 +28,12 @@
 - 4.1.3 fails when no zone is active
 - 6.2.4.2 checks every file in the audit log directory
 - 6.1.2.5 skipped on suse15cis_rsyslog_ansiblemanaged
+- 1.3.1.3 checks every loaded profile is in enforce or complain mode
+- 1.3.1.4 fails on any profile or process in complain mode
+- 1.3.1.3 and 1.3.1.4 fail on unconfined processes
+- 6.1.3.1 checks mode, owner and group of every /var/log file
+- 6.1.3.1 auditd log_group test removed, covered by 6.2.4.4
+- 3.1.2 checks each wireless driver module is not loadable, not loaded and deny listed
 - 6.2.3.26 no longer gated on suse15cis_apparmor_disable
 
 ## CIS Benchmark 2.0.1
