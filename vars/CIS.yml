@@ -637,10 +637,6 @@ suse15cis_ftp_client: false
 # are skipped.
 suse15cis_is_router: false
 
-## IPv4 requirement toggle
-# This variable governs whether ipv4 is enabled or disabled.
-suse15cis_ipv4_required: true
-
 ## IPv6 requirement toggle
 # This variable governs whether ipv6 is enabled or disabled.
 suse15cis_ipv6_required: false
@@ -674,15 +670,6 @@ suse15cis_loopback_zone: trusted
 ##
 
 # SSH 5.1.x
-# This variable specifies the encryption algorithms that can be used for securing
-# data transmission.
-suse15cis_sshd_weak_ciphers:
-  - 3des-cbc
-  - aes128-cbc
-  - aes192-cbc
-  - aes256-cbc
-  - chacha20-poly1305@openssh.com
-
 # This variable is used to state the key exchange algorithms used to establish secure encryption
 # keys during the initial connection setup.
 suse15cis_sshd_weak_kex:

@@ -100,9 +100,7 @@ syverfile:
   section_5/cis_5.4.3/*.yml: {}
   {{ end }}
   {{ if .Vars.suse15cis_section6 }}
-  {{ if eq .Vars.suse15cis_syslog "journald" }}
   section_6/cis_6.1.1/*.yml: {}
-  {{ end }}
   {{ if eq .Vars.suse15cis_syslog "rsyslog" }}
   section_6/cis_6.1.2/*.yml: {}
   {{ end }}

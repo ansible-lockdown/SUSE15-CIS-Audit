@@ -34,6 +34,13 @@
 - 6.1.3.1 checks mode, owner and group of every /var/log file
 - 6.1.3.1 auditd log_group test removed, covered by 6.2.4.4
 - 3.1.2 checks each wireless driver module is not loadable, not loaded and deny listed
+- 7.2.8 checks local interactive users only
+- 6.1.1 always included, 6.1.1.2-6.1.1.5 skipped when syslog is rsyslog
+- 6.1.2.10 skipped when no remote log server is set
+- 6.1.3.1 handles file names containing a colon
+- 6.1.3.1 lastlog-* files use the default class
+- 1.3.1.3 counts profiles in kill mode
+- suse15cis_ipv4_required and suse15cis_sshd_weak_ciphers removed
 - 6.2.3.26 no longer gated on suse15cis_apparmor_disable
 
 ## CIS Benchmark 2.0.1

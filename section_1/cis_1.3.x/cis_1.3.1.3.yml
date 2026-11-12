@@ -11,10 +11,11 @@ command:
         /profiles are loaded/ {pl=$1}
         /profiles are in enforce mode/ {pe=$1}
         /profiles are in complain mode/ {pc=$1}
+        /profiles are in kill mode/ {pk=$1}
         /processes are unconfined but have a profile defined/ {qu=$1}
         END {
           print "profiles_loaded=" pl+0
-          print "profiles_enforce_or_complain=" (pl+0 == pe+pc ? "all" : pe+pc)
+          print "profiles_enforce_or_complain=" (pl+0 == pe+pc+pk ? "all" : pe+pc+pk)
           print "processes_unconfined=" (qu == "" ? "missing" : qu)
         }'
     exit-status: 0

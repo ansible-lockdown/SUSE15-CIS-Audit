@@ -4,6 +4,8 @@
 service:
   systemd-journal-remote.socket:
     title: 6.1.1.2 | Ensure systemd-journal-remote service is not in use
+    skip: {{ ne .Vars.suse15cis_syslog "journald" }}
+    skip-reason: rsyslog is the logging method, suse15cis_syslog is not journald
     running: false
     enabled: false
     meta:
@@ -17,6 +19,8 @@ service:
       - AU-12
   systemd-journal-remote.service:
     title: 6.1.1.2 | Ensure systemd-journal-remote service is not in use
+    skip: {{ ne .Vars.suse15cis_syslog "journald" }}
+    skip-reason: rsyslog is the logging method, suse15cis_syslog is not journald
     running: false
     enabled: false
     meta:

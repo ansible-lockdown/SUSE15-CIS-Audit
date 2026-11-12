@@ -5,6 +5,8 @@
 command:
   rsyslog_gtls_configured:
     title: 6.1.2.10 | Ensure rsyslog forwarding uses gtls
+    skip: {{ not .Vars.suse15cis_remote_log_server }}
+    skip-reason: remote log forwarding is not configured (suse15cis_remote_log_server is false)
     exec: grep -Phsi -- '^\h*StreamDriver="gtls"' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
     exit-status: 0
     stdout:
