@@ -1,9 +1,8 @@
 ---
 
 {{ if .Vars.suse15cis_level_2 }}
-  {{ if not .Vars.suse15cis_apparmor_disable }}
-command:
   {{ if .Vars.suse15cis_rule_6_3_3_14 }}
+command:
   auditd_MAC_cnf:
     title: 6.3.3.14 | Ensure events that modify the system's Mandatory Access Controls are collected | Config
     exec: grep MAC-policy /etc/audit/rules.d/*.rules
@@ -34,6 +33,5 @@ command:
       NIST800-53R5:
       - AU-3
       - CM-6
-    {{ end }}
   {{ end }}
 {{ end }}
