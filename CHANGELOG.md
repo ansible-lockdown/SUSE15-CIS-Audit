@@ -2,6 +2,29 @@
 
 ## CIS Benchmark 2.0.1
 
+## November 2026 - audit test fixes
+
+- 1.3.1.3 checks every loaded profile is in enforce, complain or kill mode
+- 1.3.1.4 fails on any profile or process in complain mode
+- 1.3.1.3 and 1.3.1.4 fail on unconfined processes
+- 2.4.1.8 cron.allow 0640 or more restrictive
+- 3.1.1 passes when IPv6 is disabled in the kernel
+- 3.1.2 checks each wireless driver module is not loadable, not loaded and deny listed
+- 6.2.1 always included
+- 6.2.1.4 no longer expects journald stopped when syslog is rsyslog
+- 6.2.2 always included, skipped when syslog is rsyslog
+- 6.2.2.1.x skipped on suse15cis_system_is_log_server
+- 6.2.3.1.1 skipped when no remote log server is set
+- 6.2.3.6 skipped on suse15cis_rsyslog_ansiblemanaged
+- 6.2.4.1 checks mode, owner and group of every /var/log file
+- 6.2.4.1 auditd log_group test removed, covered by 6.3.4.4
+- 6.3.3.14 no longer gated on suse15cis_apparmor_disable
+- 6.3.4.2 checks every file in the audit log directory
+- 7.2.8 checks local interactive users only
+- 2.4.1.8 duplicate CIS_ID removed
+- suse15cis_rsyslog_ansiblemanaged and suse15cis_system_is_log_server added
+- suse15cis_ipv4_required removed
+
 ## November 2026 - QA fixes
 
 - 5.1.7 rebuilt, invalid YAML stopped the whole audit

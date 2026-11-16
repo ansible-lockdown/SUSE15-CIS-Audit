@@ -585,10 +585,6 @@ suse15cis_ftp_client: false
 # are skipped.
 suse15cis_is_router: false
 
-## IPv4 requirement toggle
-# This variable governs whether ipv4 is enabled or disabled.
-suse15cis_ipv4_required: true
-
 ## IPv6 requirement toggle
 # This variable governs whether ipv6 is enabled or disabled.
 suse15cis_ipv6_required: false
@@ -768,6 +764,11 @@ suse15cis_journald_runtimekeepfree: 100G
 # Values are Xm, Xh, Xday, Xweek, Xmonth, Xyear, for example 2week is two weeks
 # ATTENTION: Uncomment the keyword below when values are set!
 suse15cis_journald_maxfilesec: 1month
+
+## Control 6.2.3.6 - Ensure rsyslog logging is configured
+# Whether the role manages the mail, news and misc logging rules in /etc/rsyslog.conf; when false 6.2.3.6 is skipped
+suse15cis_rsyslog_ansiblemanaged: true
+suse15cis_system_is_log_server: false
 
 ## Control 6.2.3.6 - Ensure rsyslog is configured to send logs to a remote log host
 # This variable governs if 'rsyslog' service should be automatically configured to forward messages to a

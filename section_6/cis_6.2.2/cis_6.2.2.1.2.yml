@@ -5,6 +5,7 @@
 command:
   journald_remote_config:
     title: 6.2.2.1.2 | Ensure systemd-journal-upload authentication is configured
+    skip: {{ or (ne .Vars.suse15cis_syslog "journald") .Vars.suse15cis_system_is_log_server }}
     exec: systemd-analyze cat-config systemd/journal-upload.conf
     exit-status: 0
     stdout:

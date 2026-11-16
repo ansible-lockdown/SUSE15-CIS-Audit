@@ -5,6 +5,7 @@
 command:
   compress_journald_conf:
     title: 6.2.2.3 | Ensure journald Compress is configured
+    skip: {{ ne .Vars.suse15cis_syslog "journald" }}
     exec: grep -i compress /etc/systemd/journald.conf /etc/systemd/journald.conf.d/*
     exit-status:
       or:

@@ -5,6 +5,7 @@
 command:
   storage_journald_conf:
     title: 6.2.2.4 | Ensure journald Storage is configured
+    skip: {{ ne .Vars.suse15cis_syslog "journald" }}
     exec: grep -i storage /etc/systemd/journald.conf /etc/systemd/journald.conf.d/*
     exit-status:
       or:

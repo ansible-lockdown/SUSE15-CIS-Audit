@@ -21,12 +21,12 @@ file:
     exists: true
     owner: root
     group: root
-    mode: "0640"
+    mode:
+      match-regexp: '^0[0246][04]0$'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
-      - 2.4.1.8
       - 2.4.1.8
       NIST800-53R5:
       - AC-3

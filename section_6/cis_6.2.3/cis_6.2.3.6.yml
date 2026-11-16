@@ -5,6 +5,7 @@
 file:
   rsyslog_logging:
     title: 6.2.3.6 | Ensure rsyslog logging is configured
+    skip: {{ not .Vars.suse15cis_rsyslog_ansiblemanaged }}
     path: /etc/rsyslog.conf
     exists: true
     contents:

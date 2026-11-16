@@ -26,16 +26,6 @@ service:
       NIST800-53R5: NA
     {{ end }}
     {{ if eq .Vars.suse15cis_syslog "rsyslog" }}
-  only_rsyslog_installed_pkg:
-    title: 6.2.1.4 | Ensure only one logging system is in use | rsyslog
-    name: systemd-journald.service
-    running: false
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 6.2.1.4
-      NIST800-53R5: NA
   only_rsyslog_installed_no_journald:
     title: 6.2.1.4 | Ensure only one logging system is in use | rsyslog
     name: rsyslog

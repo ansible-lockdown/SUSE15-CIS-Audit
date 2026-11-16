@@ -5,6 +5,7 @@
 command:
   journald_syslog:
     title: 6.2.2.2 | Ensure journald ForwardToSyslog is disabled
+    skip: {{ ne .Vars.suse15cis_syslog "journald" }}
     exec: grep -i forward /etc/systemd/journald.conf /etc/systemd/journald.conf.d/*
     exit-status:
       or:
